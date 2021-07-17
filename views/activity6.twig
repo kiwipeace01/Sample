@@ -1,0 +1,208 @@
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+
+    img{
+        height:200px;
+        width:auto;
+    }
+
+    #sortable {
+    display: block;
+    border-width: 6px 0;
+    padding: 4px 0;
+    height: 270px;
+    width: 1480px;
+    border-radius:15px;
+    }
+
+    .item {
+    display: block;
+    float: left;
+    height: 250px;
+    width: auto;
+    box-sizing: border-box; /* keep padding/border inside height/width */
+    margin:22px;
+    font-size:20px;
+    }
+
+    p{
+        font-size:20px;
+    }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+    $(function() {
+        $( '#sortable' ).sortable({
+            axis:'x',
+            update: function( event, ui ) {
+                idsInOrder = [];
+                $('#sortable div').each(function() {
+                    idsInOrder.push($(this).attr('id'));
+                });
+                $('#order').val(idsInOrder);
+            }
+        });
+    });
+
+    </script>
+</head>
+<body>
+    <header style="background-color: #38a3a5;">
+      <div class="px-3 py-2 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              &nbsp;
+              &nbsp;
+              <span style="font-size:30px;">Split Consensus - Exercise 6 of 14</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+<div style="margin-left:44px;margin-right:44px;">
+    <div class="text-center mt-4">
+
+        <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
+        <p><b>Consider the following industries and byproducts of society. Order them from which you think to be the least responsible to the most responsible for the environmental damage.</b></p>
+        <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
+
+        <div>
+            <div class="row">
+                <div id='sortable'>
+                    <div class='item' id="government" name="government"><img src="\images\guilty\gov.png"><br>Government</div>
+                    <div class='item' id="industry" name="industry"><img src="\images\guilty\engineer.png"><br>Industry</div>
+                    <div class='item' id="business_people" name="business_people"><img src="\images\guilty\bisne.png"><br>Buisness people</div>
+                    <div class='item' id="civilians" name="civilians"><img src="\images\guilty\ppl.png"><br>Civilians</div>
+                    <div class='item' id="scientists" name="scientists"><img src="\images\guilty\sciencedude.png"><br>Scientists</div>
+                    <div class='item' id="misinformation" name="misinformation"><img src="\images\guilty\misinfo.png"><br>Misinformation</div>
+                </div>
+            </div>
+            <img src="\images\lines\line6.jpg" style="margin-left:-50px;width:107%;margin-bottom:30px;height:auto;">
+            <p style="float:left;"><strong>Least responsible</strong>
+            <br>
+            <br>
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            </p> 
+
+
+            <p style="float:right;"><strong>Most responsible</strong>
+            <br>
+            <br>
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            </p>
+            <br><br><br><br><br><br><br>
+
+            <form id="subForm" action="/activity7/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+                <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
+                <input type="hidden" id="order" name="order" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+function startTimer(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc, 1000)
+
+            document.getElementById("canvas").style.visibility = "hidden";
+            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+            display.textContent = " 00:00";
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+            function sendFunc(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+               document.forms.item(0).submit()
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if(minutes==1){
+                document.getElementById('sec').value = (1-minutes)+":"+(60-seconds)
+            } else{
+                document.getElementById('sec').value = (0)+":"+(60-seconds)
+            }
+            
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
+    var duration = '{{ time }}'
+    duration = duration - 1
+    var userID = '{{ userID }}';
+    var question = '{{ question }}';
+
+    display = document.querySelector('#time')
+    capText = document.getElementById("caption");
+    sec = document.getElementById("sec");
+
+    window.onload = function () {
+
+        if (duration <= 0) {
+            duration = 0
+        } else {
+            startTimer(duration, display, capText,userID);
+        }
+    }
+
+</script>
+</html>

@@ -1,0 +1,435 @@
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>   
+    <style>
+
+    #sortable1{
+        border: 1px solid #eee;
+        width: 150px;
+        min-height: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 3px 0 0 0;
+        float: left;
+        margin-right: 10px;
+        border-radius:5px;
+    }
+    #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9, #sortable10, #sortable11 {
+        border: 1px solid #eee;
+        width: 120px;
+        min-height: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 3px 0 0 0;
+        float: left;
+        margin-right: 10px;
+        background-color: lightblue;
+        border-radius:5px;
+    }
+    
+    #sortable1 li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        border-radius:5px;
+    }
+
+    #sortable2 li, #sortable3 li, #sortable4 li, #sortable5 li, #sortable6 li, #sortable7 li, #sortable8 li, #sortable9 li, #sortable10 li, #sortable11 li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        border-radius:5px;
+    }
+    
+    p{
+        font-size:20px;
+    }
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+    var first = [];
+    var second = [];
+    var third = [];
+    var fourth = [];
+    var fifth = [];
+    var sixth = [];
+    var seventh = [];
+    var eighth = [];
+    var ninth = [];
+    var tenth = [];
+
+    $( function() {
+
+        $( "#sortable1" ).sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+
+        $( "#sortable2" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                first.push(ui.item.context.id)
+                $("#first").val(first)
+            },
+            remove: function( event, ui ) {
+                first = first.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#first").val(first)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable3" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                second.push(ui.item.context.id)
+                $("#30-35k").val(second)
+            },
+            remove: function( event, ui ) {
+                second = second.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#30-35k").val(second)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable4" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                third.push(ui.item.context.id)
+                $("#25-30k").val(third)
+            },
+            remove: function( event, ui ) {
+                third = third.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#25-30k").val(third)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable5" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                fourth.push(ui.item.context.id)
+                $("#20-25k").val(fourth)
+            },
+            remove: function( event, ui ) {
+                fourth = fourth.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#20-25k").val(fourth)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable6" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                fifth.push(ui.item.context.id)
+                $("#15-20k").val(fifth)
+            },
+            remove: function( event, ui ) {
+                fifth = fifth.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#15-20k").val(fifth)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable7" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                sixth.push(ui.item.context.id)
+                $("#10-15k").val(sixth)
+            },
+            remove: function( event, ui ) {
+                sixth = sixth.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#10-15k").val(sixth)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable8" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                seventh.push(ui.item.context.id)
+                $("#7_5-10k").val(seventh)
+            },
+            remove: function( event, ui ) {
+                seventh = seventh.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#7_5-10k").val(seventh)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable9" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                eighth.push(ui.item.context.id)
+                $("#5-7_5k").val(eighth)
+                
+            },
+            remove: function( event, ui ) {
+                eighth = eighth.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#5-7_5k").val(eighth)
+                
+            }
+
+        }).disableSelection();
+
+        $( "#sortable10" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                ninth.push(ui.item.context.id)
+                $("#3-5k").val(ninth)
+            },
+            remove: function( event, ui ) {
+                ninth = ninth.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#3-5k").val(ninth)
+            }
+
+        }).disableSelection();
+
+        $( "#sortable11" ).sortable({
+            connectWith: ".connectedSortable",
+            receive: function( event, ui ) {
+                tenth.push(ui.item.context.id)
+                $("#1-3k").val(tenth)
+            },
+            remove: function( event, ui ) {
+                tenth = tenth.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+                $("#1-3k").val(tenth)
+            }
+
+        }).disableSelection();
+
+
+    });
+
+    function submitAll() {
+        var sum = first.length + second.length + third.length + fourth.length + fifth.length + sixth.length + seventh.length + eighth.length + ninth.length + tenth.length;
+        if(sum==13){
+            return true;
+        } else{
+            //alert(first.length +"\ "+ second.length+"\ "+third.length+"\ "+fourth.length+"\ "+fifth.length+"\ "+sixth.length+"\ "+seventh.length+"\ "+eighth.length+"\ "+ninth.length+"\ "+tenth.length)
+            alert("Please drag and drop all the occupations into the blue areas");
+            return false;
+        }
+    }
+
+    var userID = '{{ userID }}';
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <header style="background-color: #38a3a5;">
+      <div class="px-3 py-2 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              &nbsp;
+              &nbsp;
+              <span style="font-size:30px;">Split Consensus - Exercise 1 of 14</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+<div style="margin-left:44px;margin-right:44px;">
+    <div class="text-center mt-4">
+
+        <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
+        <p><b>Please drag and drop the given animals into the given areas according to how much you think they weigh</b></p>
+        <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
+
+        <div>
+            <div class="row">
+                        <ul id="sortable1" class="connectedSortable">
+                        <li class="ui-state-default" id="us_president">Elephant</li>
+                        <li class="ui-state-default" id="orthodontist">Rabbit</li>
+                        <li class="ui-state-default" id="us_vicepresident">Giraffe</li>
+                        <li class="ui-state-default" id="dentist">Whale</li>
+                        <li class="ui-state-default" id="lawyer">Monkey</li>
+                        <li class="ui-state-default" id="software_developer">Crocodile</li>
+                        <li class="ui-state-default" id="makeup_artist">Gorilla</li>
+                        <li class="ui-state-default" id="highschool_teacher">Horse</li>
+                        <li class="ui-state-default" id="arts_design_media">Vulture</li>
+                        <li class="ui-state-default" id="firefighter">Hippo</li>
+                        <li class="ui-state-default" id="legislator">Meerkat</li>
+                        <li class="ui-state-default" id="hairdresser">Mouse</li>
+                        <li class="ui-state-default" id="cashier">Bee</li>
+                        </ul>
+
+                        <ul id="sortable2" class="connectedSortable">
+                        40,000 kg+ 
+                        </ul>  
+
+                        <ul id="sortable3" class="connectedSortable">
+                        2000-10,000 kg
+                        </ul>
+
+                        <ul id="sortable4" class="connectedSortable">
+                        1000-2000 kg
+                        </ul>
+
+                        <ul id="sortable5" class="connectedSortable">
+                        500-1000 kg
+                        </ul>
+
+                        <ul id="sortable6" class="connectedSortable">
+                        250-500 kg
+                        </ul>
+
+                        <ul id="sortable7" class="connectedSortable">
+                        100-250 kg
+                        </ul>
+
+                        <ul id="sortable8" class="connectedSortable">
+                        50-100 kg
+                        </ul>
+
+                        <ul id="sortable9" class="connectedSortable">
+                        10-50 kg
+                        </ul>
+
+                        <ul id="sortable10" class="connectedSortable">
+                        1-10 kg
+                        </ul>
+
+                        <ul id="sortable11" class="connectedSortable">
+                        0-1000 g
+                        </ul>
+            </div>
+            <form id="subForm" action="/activity2/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+                <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+                <input type="hidden" id="first" name="thirtyFiveThousand" value="">
+                <input type="hidden" id="30-35k" name="thirtyThousand" value="">
+                <input type="hidden" id="25-30k" name="twentyFiveThousand" value="">
+                <input type="hidden" id="20-25k" name="twentyThousand" value="">
+                <input type="hidden" id="15-20k" name="fifteenThousand" value="">
+                <input type="hidden" id="10-15k" name="tenThousand" value="">
+                <input type="hidden" id="7_5-10k" name="sevenThousandFiveHundred" value="">
+                <input type="hidden" id="5-7_5k" name="fiveThousand" value="">
+                <input type="hidden" id="3-5k" name="threeThousand" value="">
+                <input type="hidden" id="1-3k" name="oneThousand" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit" name="submitButton">
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+<script>
+function startTimer(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc, 1000)
+
+            document.getElementById("canvas").style.visibility = "hidden";
+            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+            display.textContent = " 00:00";
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+            function sendFunc(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+               document.forms.item(0).submit()
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if(minutes==1){
+                document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            } else{
+                document.getElementById('sec').value = (1)+":"+(60-seconds)
+            }
+            
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
+    var duration = '{{ time }}'
+    duration = duration - 1
+    var userID = '{{ userID }}';
+    var question = '{{ question }}';
+
+    display = document.querySelector('#time')
+    capText = document.getElementById("caption");
+    sec = document.getElementById("sec");
+
+    window.onload = function () {
+
+        if (duration <= 0) {
+            duration = 0
+        } else {
+            startTimer(duration, display, capText,userID);
+        }
+    }
+
+</script>
+</html>

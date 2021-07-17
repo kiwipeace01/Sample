@@ -1,0 +1,169 @@
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+    #custom-handle {
+      width: 3em;
+      height: 1.6em;
+      top: 50%;
+      margin-top: -.8em;
+      text-align: center;
+      line-height: 1.6em;
+    }
+
+    .check{
+      height:20px;
+      width:20px;
+    }
+
+    div.row{
+      margin:50px;
+      margin-left:200px;
+      margin-right:200px;
+      font-size:17px;
+    }
+    p{
+        font-size:20px;
+    }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+
+      var handle = $( "#custom-handle" );
+      $( "#slider" ).slider({
+        min:0,
+        max:10,
+        step:1,
+        value:5,
+        create: function() {
+          handle.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle.text( ui.value );
+          $( "#political_spectrum" ).val( ui.value );
+        }
+      });
+    } );
+
+    function submitAll() {
+        var sum = items.length;
+        if(sum==0){
+            return true;
+        } else{
+            alert("Please drag and drop all the people into the blue area");
+            return false;
+        }
+    }
+
+    </script>
+</head>
+<body>
+    <header style="background-color: #38a3a5;">
+      <div class="px-3 py-2 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              &nbsp;
+              &nbsp;
+              <span style="font-size:30px;">Split Consensus - Post Study Demographic Survery</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+<div style="margin-left:44px;margin-right:44px;">
+    <div class="text-center mt-4">
+        <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
+        <p><b>Please answer the following to the best of your ability.  
+                All answers will be kept confidential and will only be reported 
+                statistically (grouped with others’ responses). 
+        </b></p>
+        <div>
+        <form id="subForm" action="/end/{{ userID }}/" method="POST">
+          <div class="row">
+            <label style="font-size:20px;" for="year_of_birth">Enter your year of birth</label>
+            <input type="number" class="form-control" id="year_of_birth" name="year_of_birth" placeholder="" value="" required>
+          </div>  
+          <div class="row">
+            <label style="font-size:20px;" for="place_of_birth">Enter your place of birth</label>
+            <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" placeholder="" value="" required>
+          </div>  
+          <div class="row">
+            <label style="font-size:20px;" for="place_of_residence">Enter your place of residence</label>
+            <input type="text" class="form-control" id="place_of_residence" name="place_of_residence" placeholder="" value="" required>
+          </div>  
+          <div class="row">
+            <label style="font-size:20px;" for="gender">Select your gender</label>
+
+            <label style="margin-left:50px;margin-right:50px;">
+              <input type="radio" name="gender" id="gender" value="male" checked>
+              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+              </svg>
+              Male
+            </label>
+
+            <label style="margin-right:50px;">
+              <input type="radio" name="gender" id="gender" value="female">
+              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-gender-female" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/>
+              </svg>
+              Female
+            </label>
+
+            <label style="margin-right:50px;">
+              <input type="radio" name="gender" id="gender" value="other">
+              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-gender-trans" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1.707L3.5 2.793l.646-.647a.5.5 0 1 1 .708.708l-.647.646.822.822A3.99 3.99 0 0 1 8 3c1.18 0 2.239.51 2.971 1.322L14.293 1H11.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 0 1-3.05-5.814l-.95-.949-.646.647a.5.5 0 1 1-.708-.708l.647-.646L1 1.707V3.5a.5.5 0 0 1-1 0v-3zm5.49 4.856a3 3 0 1 0 5.02 3.288 3 3 0 0 0-5.02-3.288z"/>
+              </svg>
+              Other
+            </label>
+
+          </div> 
+          <div class="row">
+            <label style="font-size:20px;" for="slider" style="margin-right:50px;">I identify on the following position of the political spectrum </label>
+            <br>
+            <br>
+              <div id="slider" style="width:60%;margin-right:5%;">
+                <img src="\images\lines\labels.png" style="width:119%;margin-bottom:30px;height:auto;margin-top:15px;margin-left:-10%;">
+              </div>
+              <input id="political_spectrum" name="political_spectrum" type="hidden" value="">
+          </div>  
+          <br>
+          <div class="row">
+              <label style="font-size:20px;" for="no">I'd rather not state my political identification
+              <input class="check" type="checkbox" name="no" id="no">
+              </label>
+          </div>
+          <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+          <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">        
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+

@@ -1,0 +1,232 @@
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+
+    #sortable,#sortable1 { 
+        list-style-type: none;
+        margin: 40px; padding: 15px;
+        width: 40%; 
+    }
+    #sortable li,#sortable1 li { 
+        margin: 15px;
+        padding: 5px; 
+        font-size: 20px; 
+        height: 2em;
+        border-radius:7px;
+    }
+
+    html>body #sortable li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+    html>body #sortable1 li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
+    .ui-state-highlight { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
+    p{
+        font-size:20px;
+    }
+
+    ul{
+        background-color:lightgrey;
+        padding:10px;
+        border-radius:7px;
+    }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    items=["good_sexual_life","financial_security","gives_family","attractive_to_me","effective_communicator","same_interests"]
+
+    $(function() {
+        $( '#sortable' ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            update: function( event, ui ) {
+                idsInOrder = [];
+                $('#sortable li').each(function() {
+                    idsInOrder.push($(this).attr('id'));
+                });
+                $('#order').val(idsInOrder);
+            }
+        });
+        $( "#sortable" ).disableSelection();
+
+        $( "#sortable1" ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            receive: function( event, ui ) {
+                items.push(ui.item.context.id)
+            },
+            remove: function( event, ui ) {
+                items = items.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+            }
+
+        }).disableSelection();
+    });
+    function submitAll() {
+        var sum = items.length;
+        if(sum==0){
+            return true;
+        } else{
+            alert("Please drag and drop all the characteristics into the blue area");
+            return false;
+        }
+    }
+
+    </script>
+</head>
+<body>
+    <header style="background-color: #38a3a5;">
+      <div class="px-3 py-2 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              &nbsp;
+              &nbsp;
+              <span style="font-size:30px;">Split Consensus - Exercise 11 of 14</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+<div style="margin-left:44px;margin-right:44px;">
+    <div class="text-center mt-4">
+
+        <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
+        <p><b>Drag and drop the following characteristics that you think your spouse should posses from the grey box to the blue box, ordering them from most important to least important</b></p>
+        <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
+        
+        <div>
+            <h3 style="margin-left:53%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most important</h3>
+            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
+                <ul id="sortable1" class="connectedSortable">
+                <li id="good_sexual_life" name="good_sexual_life" class="ui-state-default">Commits to a good sexual life</li>
+                <li id="financial_security" name="financial_security" class="ui-state-default">Guarantees financial security</li>
+                <li id="gives_family" name="gives_family" class="ui-state-default">Gives me a family</li>
+                <li id="attractive_to_me" name="attractive_to_me" class="ui-state-default">I find attractive</li>
+                <li id="effective_communicator" name="effective_communicator" class="ui-state-default">Communicates effectively</li>
+                <li id="same_interests" name="same_interests" class="ui-state-default">Has the same interests </li>
+                </ul>
+                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
+                </ul>
+            </div>
+            <h3 style="margin-left:53%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least important</h3>
+
+            <form id="subForm" action="/activity12/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+                <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
+                <input type="hidden" id="order" name="order" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+function startTimer(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc, 1000)
+
+            document.getElementById("canvas").style.visibility = "hidden";
+            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+            display.textContent = " 00:00";
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+            function sendFunc(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+               document.forms.item(0).submit()
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if(minutes==1){
+                document.getElementById('sec').value = (1-minutes)+":"+(60-seconds)
+            } else{
+                document.getElementById('sec').value = (0)+":"+(60-seconds)
+            }
+            
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
+    var duration = '{{ time }}'
+    duration = duration - 1
+    var userID = '{{ userID }}';
+    var question = '{{ question }}';
+
+    display = document.querySelector('#time')
+    capText = document.getElementById("caption");
+    sec = document.getElementById("sec");
+
+    window.onload = function () {
+
+        if (duration <= 0) {
+            duration = 0
+        } else {
+            startTimer(duration, display, capText,userID);
+        }
+    }
+
+</script>
+</html>
+

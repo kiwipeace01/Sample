@@ -1,0 +1,210 @@
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <style>
+
+    .image{
+        height:200px;
+        border-radius:100px;
+        width:200px;
+    }
+
+    #sortable {
+    display: block;
+    border-width: 6px 0;
+    padding: 4px 0;
+    height: 250px;
+    }
+
+    .item {
+    display: block;
+    float: left;
+    height: 100%;
+    width: 200px;
+    box-sizing: border-box; /* keep padding/border inside height/width */
+    border-radius:100px;
+    margin:20px;
+    font-size:20px;
+    }
+
+    p{
+        font-size:20px;
+    }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+    
+
+    $(function() {
+        $( '#sortable' ).sortable({
+            axis:'x',
+            update: function( event, ui ) {
+                idsInOrder = [];
+                $('#sortable div').each(function() {
+                    idsInOrder.push($(this).attr('id'));
+                });
+                $('#order').val(idsInOrder);
+            }
+        });
+    });
+
+
+    </script>
+</head>
+<body>
+    <header style="background-color: #38a3a5;">
+      <div class="px-3 py-2 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              &nbsp;
+              &nbsp;
+              <span style="font-size:30px;">Split Consensus - Exercise 2 of 14</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+<div style="margin-left:44px;margin-right:44px;">
+    <div class="text-center mt-4">
+
+        <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
+        <p><b>Please rearrange the given occupations to sort them according to the average hourly income you think they receive</b></p>
+        <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
+
+        <div>
+            <div class="row">
+
+                <div id='sortable'>
+                    <div class='item' id="doctor" name="doctor"><img class="image" src="https://images.theconversation.com/files/304957/original/file-20191203-66986-im7o5.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"><br>Doctor</div>
+                    <div class='item' id="makeup_artist" name="makeup_artist"><img class="image" src="https://cdn2.howtostartanllc.com/images/business-ideas/business-idea-images/makeup-artist-business.jpg"><br>Makeup Artist</div>
+                    <div class='item' id="software_developer" name="software_developer"><img class="image" src="https://savvycomsoftware.com/wp-content/uploads/2019/07/software-developers-engineer-1.jpg"><br>Software Developer</div>
+                    <div class='item' id="dentist" name="dentist"><img class="image" src="https://c.files.bbci.co.uk/2291/production/_110894880_gettyimages-1055182908.jpg"><br>Dentist</div>
+                    <div class='item' id="priest" name="priest"><img class="image" src="https://www.collinsdictionary.com/images/full/priest_125514803.jpg"><br>Priest</div>
+                    <div class='item' id="teacher" name="teacher"><img class="image" src="https://marvel-b1-cdn.bc0a.com/f00000000026007/resilienteducator.com/wp-content/uploads/sites/34/2014/11/math-teacher.jpg"><br>Teacher</div>
+                </div>
+            </div>
+            <br>
+            <img src="\images\lines\line2.jpg" style="margin-left:-25px;width:104%;transform: scaleY(-1);margin-bottom:30px;">
+            <p style="float:left;"><strong style="margin-left:50px;">Lowest hourly income</strong>
+            <br>
+            <br>
+            <img class="image" src="\images\minus.jpg" style="width:70px;height:70px;">
+            <img class="image" src="\images\dollar.png" style="width:100px;height:100px;">
+            </p> 
+
+
+            <p style="float:right;"><strong style="margin-right:50px;">Highest hourly income</strong>
+            <br>
+            <br>
+            <img src="\images\plus.jpg" style="width:70px;height:70px;">
+            <img src="\images\dollar.png" style="width:100px;height:100px;">
+            </p>
+            <br><br><br><br><br><br><br>
+
+            <form id="subForm" action="/activity3/{{ userID }}/" method="POST">
+                <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
+                <input type="hidden" id="order" name="order" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+function startTimer(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc, 1000)
+
+            document.getElementById("canvas").style.visibility = "hidden";
+            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+            display.textContent = " 00:00";
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+            function sendFunc(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+               document.forms.item(0).submit()
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if(minutes==1){
+                document.getElementById('sec').value = (1-minutes)+":"+(60-seconds)
+            } else{
+                document.getElementById('sec').value = (0)+":"+(60-seconds)
+            }
+            
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
+    var duration = '{{ time }}'
+    duration = duration - 1
+    var userID = '{{ userID }}';
+    var question = '{{ question }}';
+
+    display = document.querySelector('#time')
+    capText = document.getElementById("caption");
+    sec = document.getElementById("sec");
+
+    window.onload = function () {
+
+        if (duration <= 0) {
+            duration = 0
+        } else {
+            startTimer(duration, display, capText,userID);
+        }
+    }
+
+</script>
+</html>

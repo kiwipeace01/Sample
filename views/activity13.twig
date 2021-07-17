@@ -1,0 +1,437 @@
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+    #custom-handle1,#custom-handle2,#custom-handle3,#custom-handle4,#custom-handle5,#custom-handle6,#custom-handle7 {
+      width: 3em;
+      height: 1.6em;
+      top: 50%;
+      margin-top: -.8em;
+      text-align: center;
+      line-height: 1.6em;
+    }
+
+    div.row{
+      padding:40px;
+      height:100px;
+      margin-left:22%;
+      margin-right:22%;
+    }
+    div.row p{
+      font-size:20px;
+    }
+    p{
+        font-size:20px;
+    }
+
+    td{
+      padding:15px;
+    }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+
+          var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            data: [{
+              type: "pie",
+              startAngle: 240,
+              yValueFormatString: "##0\"%\"",
+              indexLabel: "{label} {y}",
+              dataPoints: [
+                {y: 100, label: "Unassigned population", color:"white"},
+                {y: 0, label: "Bisexual", color:"#FFD6A5"},
+                {y: 0, label: "Heterosexual", color:"#FDFFB6"},
+                {y: 0, label: "Asexual", color:"#CAFFBF"},
+                {y: 0, label: "Trans", color:"#9BF6FF"},
+                {y: 0, label: "Non-binary", color:"#A0C4FF"},
+                {y: 0, label: "Gay", color:"#BDB2FF"},
+                {y: 0, label: "Lesbian", color:"#FFC6FF"},
+              ]
+            }]
+          });
+          chart.render();
+
+      var handle1 = $( "#custom-handle1" );
+      $( "#slider1" ).slider({
+        create: function() {
+          handle1.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle1.text( ui.value );
+          $( "#bisexual" ).val( ui.value );
+          chart.options.data[0].dataPoints[1].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#bisexual" ).val( $( "#slider1" ).slider( "value" ) );
+
+      var handle2 = $( "#custom-handle2" );
+      $( "#slider2" ).slider({
+        create: function() {
+          handle2.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle2.text( ui.value );
+          $( "#heterosexual" ).val( ui.value );
+          chart.options.data[0].dataPoints[2].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#heterosexual" ).val( $( "#slider2" ).slider( "value" ) );
+
+      var handle3 = $( "#custom-handle3" );
+      $( "#slider3" ).slider({
+        create: function() {
+          handle3.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle3.text( ui.value );
+          $( "#asexual" ).val( ui.value );
+          chart.options.data[0].dataPoints[3].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#asexual" ).val( $( "#slider3" ).slider( "value" ) );
+
+      var handle4 = $( "#custom-handle4" );
+      $( "#slider4" ).slider({
+        create: function() {
+          handle4.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle4.text( ui.value );
+          $( "#trans" ).val( ui.value );
+          chart.options.data[0].dataPoints[4].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#trans" ).val( $( "#slider4" ).slider( "value" ) );
+
+      var handle5 = $( "#custom-handle5" );
+      $( "#slider5" ).slider({
+        create: function() {
+          handle5.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle5.text( ui.value );
+          $( "#non_binary" ).val( ui.value );
+          chart.options.data[0].dataPoints[5].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#non_binary" ).val( $( "#slider5" ).slider( "value" ) );
+
+      var handle6 = $( "#custom-handle6" );
+      $( "#slider6" ).slider({
+        create: function() {
+          handle6.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle6.text( ui.value );
+          $( "#gay" ).val( ui.value );
+          chart.options.data[0].dataPoints[6].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#gay" ).val( $( "#slider6" ).slider( "value" ) );
+
+      var handle7 = $( "#custom-handle7" );
+      $( "#slider7" ).slider({
+        create: function() {
+          handle7.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+          handle7.text( ui.value );
+          $( "#lesbian" ).val( ui.value );
+          chart.options.data[0].dataPoints[7].y = ui.value;
+          chart.options.data[0].dataPoints[0].y = 100-(
+          chart.options.data[0].dataPoints[1].y+
+          chart.options.data[0].dataPoints[2].y+
+          chart.options.data[0].dataPoints[3].y+
+          chart.options.data[0].dataPoints[4].y+
+          chart.options.data[0].dataPoints[5].y+
+          chart.options.data[0].dataPoints[6].y+
+          chart.options.data[0].dataPoints[7].y);
+
+          chart.render();
+        }
+      });
+      $( "#lesbian" ).val( $( "#slider7" ).slider( "value" ) );
+
+    } );
+
+    function submitAll() {
+        var sum = 
+        parseInt(document.getElementById('bisexual').value)+
+        parseInt(document.getElementById('asexual').value)+
+        parseInt(document.getElementById('heterosexual').value)+
+        parseInt(document.getElementById('non_binary').value)+
+        parseInt(document.getElementById('trans').value)+
+        parseInt(document.getElementById('lesbian').value)+
+        parseInt(document.getElementById('gay').value);
+        if(sum==100){           
+            return true;
+        } else{
+            alert("The sum of percentages is not 100%, please make sure that the unassigned space is 0% in the pie chart (the pie chart is complete)");
+            return false;
+        }
+    }
+
+    </script>
+</head>
+<body>
+    <header style="background-color: #38a3a5;">
+      <div class="px-3 py-2 text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              &nbsp;
+              &nbsp;
+              <span style="font-size:30px;">Split Consensus - Exercise 13 of 14</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+<div style="margin-left:44px;margin-right:44px;">
+    <div class="text-center mt-4">
+        <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
+        <p><b>Drag the sliders to indicate the % of U.S. population that self-identify into the respective categories show below. (Hover over the terms in italics to see their definitions)</b></p>
+        <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
+
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>      
+
+        <div>
+        <form id="subForm" action="/activity14/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+          <table>
+            <tr>
+              <td style="background-color:FFD6A5;">
+                <p>
+                  <label for="bisexual">% of population that is <dfn title="Bisexuality is romantic attraction, sexual attraction, or sexual behavior toward both males and females, or to more than one gender.">Bisexual</dfn>:</label>
+                  <input type="text" id="bisexual" name="bisexual" readonly style="border:0; font-weight:bold;background-color:FFD6A5;">
+                </p>
+                <div id="slider1" style="width:80%;">
+                  <div id="custom-handle1" class="ui-slider-handle"></div>
+                </div>
+              </td>
+              <td style="background-color:FDFFB6;">
+                <p>
+                  <label for="heterosexual">% of population that is <dfn title="Heterosexual people are sexually or romantically attracted to people of the opposite sex.">Heterosexual</dfn>:</label>
+                  <input type="text" id="heterosexual" name="heterosexual" readonly style="border:0; font-weight:bold;background-color:FDFFB6;">
+                </p>
+                <div id="slider2" style="width:80%;">
+                  <div id="custom-handle2" class="ui-slider-handle"></div>
+                </div>
+              </td>
+              <td style="background-color:CAFFBF;">
+                <p>
+                  <label for="asexual">% of population that is <dfn title="Asexuality is the lack of sexual attraction to others, or low or absent interest in or desire for sexual activity.">Asexual</dfn>:</label>
+                  <input type="text" id="asexual" name="asexual" readonly style="border:0; font-weight:bold;background-color:CAFFBF;">
+                </p>
+                <div id="slider3" style="width:80%;">
+                  <div id="custom-handle3" class="ui-slider-handle"></div>
+                </div>
+              </td>
+              <td style="background-color:9BF6FF;">
+                <p>
+                  <label for="trans">% of population that is <dfn title="Denoting or relating to a person whose sense of personal identity and gender does not correspond with their birth sex.">Trans</dfn>:</label>
+                  <input type="text" id="trans" name="trans" readonly style="border:0; font-weight:bold;background-color:9BF6FF;">
+                </p>
+                <div id="slider4" style="width:80%;">
+                  <div id="custom-handle4" class="ui-slider-handle"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color:A0C4FF;">
+                <p>
+                  <label for="non_binary">% of population that is <dfn title="Non-binary is an umbrella term for gender identities that are neither male nor female‍—‌identities that are outside the gender binary.">Non-binary</dfn>:</label>
+                  <input type="text" id="non_binary" name="non_binary" readonly style="border:0; font-weight:bold;background-color:A0C4FF;">
+                </p>
+                <div id="slider5" style="width:80%;">
+                  <div id="custom-handle5" class="ui-slider-handle"></div>
+                </div>
+              </td>
+              <td style="background-color:BDB2FF;">
+                <p>
+                  <label for="gay">% of population that is <dfn title="Men that are sexually and/or romantically attracted to other men">Gay</dfn>:</label>
+                  <input type="text" id="gay" name="gay" readonly style="border:0; font-weight:bold;background-color:BDB2FF;">
+                </p>
+                <div id="slider6" style="width:80%;">
+                  <div id="custom-handle6" class="ui-slider-handle"></div>
+                </div>
+              </td>
+              <td style="background-color:FFC6FF;">
+                <p>
+                  <label for="lesbian">% of population that is <dfn title="Women that are sexually and/or romantically attracted to other women">Lesbian</dfn>:</label>
+                  <input type="text" id="lesbian" name="lesbian" readonly style="border:0; font-weight:bold;background-color:FFC6FF;">
+                </p>
+                <div id="slider7" style="width:80%;">
+                  <div id="custom-handle7" class="ui-slider-handle"></div>
+                </div>
+              </td>
+            </tr>
+          </table>
+                <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">  
+                <input type="hidden" id="sec" name="sec" value="">       
+        </form>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+function startTimer(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc, 1000)
+
+            document.getElementById("canvas").style.visibility = "hidden";
+            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+            display.textContent = " 00:00";
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+            function sendFunc(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+               document.forms.item(0).submit()
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if(minutes==1){
+                document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            } else{
+                document.getElementById('sec').value = (1)+":"+(60-seconds)
+            }
+            
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
+    var duration = '{{ time }}'
+    duration = duration - 1
+    var userID = '{{ userID }}';
+    var question = '{{ question }}';
+
+    display = document.querySelector('#time')
+    capText = document.getElementById("caption");
+    sec = document.getElementById("sec");
+
+    window.onload = function () {
+
+        if (duration <= 0) {
+            duration = 0
+        } else {
+            startTimer(duration, display, capText,userID);
+        }
+    }
+
+</script>
+</html>
+
