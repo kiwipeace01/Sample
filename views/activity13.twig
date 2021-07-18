@@ -49,7 +49,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
     $( function() {
-
+          
           var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             data: [{
@@ -78,7 +78,7 @@
         },
         slide: function( event, ui ) {
           handle1.text( ui.value );
-          $( "#bisexual" ).val( ui.value );
+          $( "#bisexual" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[1].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -101,7 +101,7 @@
         },
         slide: function( event, ui ) {
           handle2.text( ui.value );
-          $( "#heterosexual" ).val( ui.value );
+          $( "#heterosexual" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[2].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -124,7 +124,7 @@
         },
         slide: function( event, ui ) {
           handle3.text( ui.value );
-          $( "#asexual" ).val( ui.value );
+          $( "#asexual" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[3].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -147,7 +147,7 @@
         },
         slide: function( event, ui ) {
           handle4.text( ui.value );
-          $( "#trans" ).val( ui.value );
+          $( "#trans" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[4].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -170,7 +170,7 @@
         },
         slide: function( event, ui ) {
           handle5.text( ui.value );
-          $( "#non_binary" ).val( ui.value );
+          $( "#non_binary" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[5].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -193,7 +193,7 @@
         },
         slide: function( event, ui ) {
           handle6.text( ui.value );
-          $( "#gay" ).val( ui.value );
+          $( "#gay" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[6].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -209,6 +209,10 @@
       });
       $( "#gay" ).val( $( "#slider6" ).slider( "value" ) );
 
+      // $('#bisexual').change(function () {
+      //       alert('This works');
+      //   }); 
+
       var handle7 = $( "#custom-handle7" );
       $( "#slider7" ).slider({
         create: function() {
@@ -216,7 +220,7 @@
         },
         slide: function( event, ui ) {
           handle7.text( ui.value );
-          $( "#lesbian" ).val( ui.value );
+          $( "#lesbian" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[7].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -251,6 +255,11 @@
         }
     }
 
+    function getValue(value){
+      document.getElementById("total").value = parseInt(document.getElementById('bisexual').value)+parseInt(document.getElementById('asexual').value)+
+      parseInt(document.getElementById('heterosexual').value)+parseInt(document.getElementById('non_binary').value)+parseInt(document.getElementById('trans').value)+
+      parseInt(document.getElementById('lesbian').value)+parseInt(document.getElementById('gay').value);
+    }
     </script>
 </head>
 <body>
@@ -276,8 +285,12 @@
         <p><b>Drag the sliders to indicate the % of U.S. population that self-identify into the respective categories show below. (Hover over the terms in italics to see their definitions)</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
 
+        <label for="total">Sum of percentages % = </label>
+        <input style="border:0;font-weight:bold;" type="text" readonly value="0" id="total" name="total">
+
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>      
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>     
+
 
         <div>
         <form id="subForm" action="/activity14/{{ userID }}/" method="POST" onsubmit="return submitAll()">
@@ -286,7 +299,7 @@
               <td style="background-color:FFD6A5;">
                 <p>
                   <label for="bisexual">% of population that is <dfn title="Bisexuality is romantic attraction, sexual attraction, or sexual behavior toward both males and females, or to more than one gender.">Bisexual</dfn>:</label>
-                  <input type="text" id="bisexual" name="bisexual" readonly style="border:0; font-weight:bold;background-color:FFD6A5;">
+                  <input onchange="getValue()" type="text" id="bisexual" name="bisexual" readonly style="border:0; font-weight:bold;background-color:FFD6A5;">
                 </p>
                 <div id="slider1" style="width:80%;">
                   <div id="custom-handle1" class="ui-slider-handle"></div>
@@ -295,7 +308,7 @@
               <td style="background-color:FDFFB6;">
                 <p>
                   <label for="heterosexual">% of population that is <dfn title="Heterosexual people are sexually or romantically attracted to people of the opposite sex.">Heterosexual</dfn>:</label>
-                  <input type="text" id="heterosexual" name="heterosexual" readonly style="border:0; font-weight:bold;background-color:FDFFB6;">
+                  <input onchange="getValue()" type="text" id="heterosexual" name="heterosexual" readonly style="border:0; font-weight:bold;background-color:FDFFB6;">
                 </p>
                 <div id="slider2" style="width:80%;">
                   <div id="custom-handle2" class="ui-slider-handle"></div>
@@ -304,7 +317,7 @@
               <td style="background-color:CAFFBF;">
                 <p>
                   <label for="asexual">% of population that is <dfn title="Asexuality is the lack of sexual attraction to others, or low or absent interest in or desire for sexual activity.">Asexual</dfn>:</label>
-                  <input type="text" id="asexual" name="asexual" readonly style="border:0; font-weight:bold;background-color:CAFFBF;">
+                  <input onchange="getValue()" type="text" id="asexual" name="asexual" readonly style="border:0; font-weight:bold;background-color:CAFFBF;">
                 </p>
                 <div id="slider3" style="width:80%;">
                   <div id="custom-handle3" class="ui-slider-handle"></div>
@@ -313,7 +326,7 @@
               <td style="background-color:9BF6FF;">
                 <p>
                   <label for="trans">% of population that is <dfn title="Denoting or relating to a person whose sense of personal identity and gender does not correspond with their birth sex.">Trans</dfn>:</label>
-                  <input type="text" id="trans" name="trans" readonly style="border:0; font-weight:bold;background-color:9BF6FF;">
+                  <input onchange="getValue()" type="text" id="trans" name="trans" readonly style="border:0; font-weight:bold;background-color:9BF6FF;">
                 </p>
                 <div id="slider4" style="width:80%;">
                   <div id="custom-handle4" class="ui-slider-handle"></div>
@@ -324,7 +337,7 @@
               <td style="background-color:A0C4FF;">
                 <p>
                   <label for="non_binary">% of population that is <dfn title="Non-binary is an umbrella term for gender identities that are neither male nor female‍—‌identities that are outside the gender binary.">Non-binary</dfn>:</label>
-                  <input type="text" id="non_binary" name="non_binary" readonly style="border:0; font-weight:bold;background-color:A0C4FF;">
+                  <input onchange="getValue()" type="text" id="non_binary" name="non_binary" readonly style="border:0; font-weight:bold;background-color:A0C4FF;">
                 </p>
                 <div id="slider5" style="width:80%;">
                   <div id="custom-handle5" class="ui-slider-handle"></div>
@@ -333,7 +346,7 @@
               <td style="background-color:BDB2FF;">
                 <p>
                   <label for="gay">% of population that is <dfn title="Men that are sexually and/or romantically attracted to other men">Gay</dfn>:</label>
-                  <input type="text" id="gay" name="gay" readonly style="border:0; font-weight:bold;background-color:BDB2FF;">
+                  <input onchange="getValue()" type="text" id="gay" name="gay" readonly style="border:0; font-weight:bold;background-color:BDB2FF;">
                 </p>
                 <div id="slider6" style="width:80%;">
                   <div id="custom-handle6" class="ui-slider-handle"></div>
@@ -342,7 +355,7 @@
               <td style="background-color:FFC6FF;">
                 <p>
                   <label for="lesbian">% of population that is <dfn title="Women that are sexually and/or romantically attracted to other women">Lesbian</dfn>:</label>
-                  <input type="text" id="lesbian" name="lesbian" readonly style="border:0; font-weight:bold;background-color:FFC6FF;">
+                  <input onchange="getValue()" type="text" id="lesbian" name="lesbian" readonly style="border:0; font-weight:bold;background-color:FFC6FF;">
                 </p>
                 <div id="slider7" style="width:80%;">
                   <div id="custom-handle7" class="ui-slider-handle"></div>
