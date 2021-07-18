@@ -85,7 +85,7 @@
         },
         slide: function( event, ui ) {
           handle1.text( ui.value );
-          $( "#white" ).val( ui.value );
+          $( "#white" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[1].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -108,7 +108,7 @@
         },
         slide: function( event, ui ) {
           handle2.text( ui.value );
-          $( "#moroccan" ).val( ui.value );
+          $( "#moroccan" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[2].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -131,7 +131,7 @@
         },
         slide: function( event, ui ) {
           handle3.text( ui.value );
-          $( "#lebanese" ).val( ui.value );
+          $( "#lebanese" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[3].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -154,7 +154,7 @@
         },
         slide: function( event, ui ) {
           handle4.text( ui.value );
-          $( "#european" ).val( ui.value );
+          $( "#european" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[4].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -177,7 +177,7 @@
         },
         slide: function( event, ui ) {
           handle5.text( ui.value );
-          $( "#arab" ).val( ui.value );
+          $( "#arab" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[5].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -200,7 +200,7 @@
         },
         slide: function( event, ui ) {
           handle6.text( ui.value );
-          $( "#asian" ).val( ui.value );
+          $( "#asian" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[6].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -223,7 +223,7 @@
         },
         slide: function( event, ui ) {
           handle7.text( ui.value );
-          $( "#american_indian" ).val( ui.value );
+          $( "#american_indian" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[7].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -246,7 +246,7 @@
         },
         slide: function( event, ui ) {
           handle8.text( ui.value );
-          $( "#two_or_more" ).val( ui.value );
+          $( "#two_or_more" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[8].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -269,7 +269,7 @@
         },
         slide: function( event, ui ) {
           handle9.text( ui.value );
-          $( "#islander" ).val( ui.value );
+          $( "#islander" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[9].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -292,7 +292,7 @@
         },
         slide: function( event, ui ) {
           handle10.text( ui.value );
-          $( "#hispanic" ).val( ui.value );
+          $( "#hispanic" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[10].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -315,7 +315,7 @@
         },
         slide: function( event, ui ) {
           handle11.text( ui.value );
-          $( "#black" ).val( ui.value );
+          $( "#black" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[11].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -346,9 +346,20 @@
         if(sum==100){
             return true;
         } else{
-              alert("The sum of percentages is not 100%, please make sure that the unassigned space is 0% in the pie chart (the pie chart is complete)");
+              alert("Error! The sum of percentages is not 100%, please try again");
             return false;
         }
+    }
+
+    function getValue(value){
+      document.getElementById("total").value = 
+        parseInt(document.getElementById('white').value)+
+        parseInt(document.getElementById('moroccan').value)+
+        parseInt(document.getElementById('lebanese').value)+
+        parseInt(document.getElementById('european').value)+
+        parseInt(document.getElementById('arab').value)+
+        parseInt(document.getElementById('asian').value)+
+        parseInt(document.getElementById('american_indian').value);
     }
 
     </script>
@@ -376,6 +387,10 @@
         <p><b>Drag the sliders to indicate the % of the earth's land area, that you think these continents occupy.
         </b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
+
+        <label for="total">Sum of percentages % = </label>
+        <input style="border:0;font-weight:bold;background-color:white;" type="text" readonly value="0" id="total" name="total">
+
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
@@ -386,7 +401,7 @@
         <td>
               <p>
                 <label for="white">% of earth's land belonging to Asia:</label>
-                <input type="text" id="white" name="white" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="white" name="white" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider1" style="width:80%;">
                 <div id="custom-handle1" class="ui-slider-handle"></div>
@@ -395,7 +410,7 @@
         <td>
               <p>
                 <label for="moroccan">% of earth's land belonging to Africa</label>
-                <input type="text" id="moroccan" name="moroccan" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="moroccan" name="moroccan" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider2" style="width:80%;">
                 <div id="custom-handle2" class="ui-slider-handle"></div>
@@ -404,7 +419,7 @@
         <td>
               <p>
                 <label for="lebanese">% of earth's land belonging to Europe:</label>
-                <input type="text" id="lebanese" name="lebanese" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="lebanese" name="lebanese" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider3" style="width:80%;">
                 <div id="custom-handle3" class="ui-slider-handle"></div>
@@ -413,7 +428,7 @@
         <td>
               <p>
                 <label for="european">% of earth's land belonging to Australia:</label>
-                <input type="text" id="european" name="european" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="european" name="european" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider4" style="width:80%;">
                 <div id="custom-handle4" class="ui-slider-handle"></div>
@@ -424,7 +439,7 @@
         <td>
               <p>
                 <label for="arab">% of earth's land belonging to North America:</label>
-                <input type="text" id="arab" name="arab" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="arab" name="arab" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider5" style="width:80%;">
                 <div id="custom-handle5" class="ui-slider-handle"></div>
@@ -433,7 +448,7 @@
         <td>
               <p>
                 <label for="asian">% of earth's land belonging to South America:</label>
-                <input type="text" id="asian" name="asian" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="asian" name="asian" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider6" style="width:80%;">
                 <div id="custom-handle6" class="ui-slider-handle"></div>
@@ -442,7 +457,7 @@
         <td>
               <p>
                 <label for="american_indian">% of earth's land belonging to Antartica:</label>
-                <input type="text" id="american_indian" name="american_indian" readonly style="border:0; font-weight:bold;">
+                <input onchange="getValue()" type="text" id="american_indian" name="american_indian" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider7" style="width:80%;">
                 <div id="custom-handle7" class="ui-slider-handle"></div>
