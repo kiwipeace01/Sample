@@ -1230,13 +1230,33 @@ router.post('/end/:userID', function (req, res, next) {
         var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,"undisclosed",req.body.topic,req.body.feedback]
     }
 
+    var all = ["lgbtq_community","race","workforce","body_weight","climate_change","future","getting_older","security","relationships"];
+    var topics = arr[5];
+    var political = arr[4];
+
+    if(topics==null){
+        if(req.body.verdict=='all_uncomfortable'){
+            topics = all;
+        } else if(req.body.verdict=="all_comfortable"){
+            topics = "did not find any topics uncomfortable";
+        } else{
+            topics = "did not answer question properely";
+        }
+    } else{
+        topics = req.body.topic;
+    }
+
+    if(req.body.political_spectrum==""){
+        political = "5";
+    }
+
     userDemographic={
         'year_of_birth':arr[0],
         'place_of_birth':arr[1],
         'place_of_residence':arr[2],
         'gender':arr[3],
-        'political_identification':arr[4],
-        'uncomfortable_topics':arr[5],
+        'political_identification':political,
+        'uncomfortable_topics':topics,
         'feedback':arr[6]
     }
     
@@ -1262,6 +1282,8 @@ router.post('/end/:userID', function (req, res, next) {
             "surveyResults": userDemographic,
             "key2pay": key
         }
+
+        console.log(newItem);
 
         UsersCol.updateOne({"user": userID}, {$set: newItem});
         console.log('User Completed task')
