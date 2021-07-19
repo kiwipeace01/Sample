@@ -1225,9 +1225,9 @@ router.post('/end/:userID', function (req, res, next) {
 
     //storesurvey results
     if(req.body.no==null){
-        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,req.body.political_spectrum]
+        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,req.body.political_spectrum,req.body.topic,req.body.feedback]
     } else{
-        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,"undisclosed"]
+        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,"undisclosed",req.body.topic,req.body.feedback]
     }
 
     userDemographic={
@@ -1235,7 +1235,9 @@ router.post('/end/:userID', function (req, res, next) {
         'place_of_birth':arr[1],
         'place_of_residence':arr[2],
         'gender':arr[3],
-        'political_identification':arr[4]
+        'political_identification':arr[4],
+        'uncomfortable_topics':arr[5],
+        'feedback':arr[6]
     }
     
     co(function* () {
