@@ -104,7 +104,7 @@
         <form id="subForm" action="/end/{{ userID }}/" method="POST">
           <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
             <label style="font-size:20px;" for="year_of_birth">Enter your year of birth</label>
-            <input style="border-radius:20px;" type="number" class="form-control" id="year_of_birth" name="year_of_birth" placeholder="" value="" required>
+            <input style="border-radius:20px;" type="number" min="1900" max="2021" step="1" class="form-control" id="year_of_birth" name="year_of_birth" placeholder="" value="" required>
           </div>  
           <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
             <label style="font-size:20px;" for="place_of_birth">Enter your place of birth</label>
