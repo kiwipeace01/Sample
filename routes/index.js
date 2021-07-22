@@ -1252,8 +1252,9 @@ router.post('/end/:userID', function (req, res, next) {
 
     userDemographic={
         'year_of_birth':arr[0],
-        'place_of_birth':arr[1],
-        'place_of_residence':arr[2],
+        'country_birth':req.body.p1,
+        'state_birth':req.body.p2,
+        'state_residence':req.body.p3,
         'gender':arr[3],
         'political_identification':political,
         'uncomfortable_topics':topics,

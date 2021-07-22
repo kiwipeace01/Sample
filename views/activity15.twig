@@ -15,9 +15,32 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://unpkg.com/d3-simple-slider"></script>
     <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    
+    <!-- Bootstrap Form Helpers -->
+    <link href="css/bootstrap-form-helpers.min.css" rel="stylesheet" media="screen">
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <!-- Bootstrap Form Helpers -->
+    <link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Form Helpers -->
+    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.css" rel="stylesheet"/>
     <style>
+    
     #custom-handle {
       width: 3em;
       height: 1.6em;
@@ -34,8 +57,8 @@
 
     div.row{
       margin:50px;
-      margin-left:200px;
-      margin-right:200px;
+      margin-left:100px;
+      margin-right:100px;
       font-size:17px;
     }
     p{
@@ -45,13 +68,14 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script>
     $( function() {
 
       var handle = $( "#custom-handle" );
       $( "#slider" ).slider({
-        min:0,
-        max:10,
+        min:1,
+        max:9,
         step:1,
         value:5,
         create: function() {
@@ -77,6 +101,15 @@
     </script>
 </head>
 <body>
+	<!-- jQuery -->
+	<script src="js/jquery-1.10.2.min.js"></script>
+	
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap Form Helpers -->
+	<script src="js/bootstrap-formhelpers.min.js"></script>
+  
     <header style="background-color: #38a3a5;">
       <div class="px-3 py-2 text-white">
         <div class="container">
@@ -93,6 +126,10 @@
         </div>
       </div>
     </header>
+    
+
+
+		
 <div style="margin-left:44px;margin-right:44px;">
     <div class="text-center mt-4">
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
@@ -101,20 +138,26 @@
                 statistically (grouped with others’ responses). 
         </b></p>
         <div>
-        <form id="subForm" action="/end/{{ userID }}/" method="POST">
+        <form class="form-group" id="subForm" action="/end/{{ userID }}/" method="POST" onsubmit="return submitForm()">
           <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
             <label style="font-size:20px;" for="year_of_birth">Enter your year of birth</label>
             <input style="border-radius:20px;" type="number" min="1900" max="2021" step="1" class="form-control" id="year_of_birth" name="year_of_birth" placeholder="" value="" required>
           </div>  
-          <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
-            <label style="font-size:20px;" for="place_of_birth">Enter your place of birth</label>
-            <input style="border-radius:20px;" type="text" class="form-control" id="place_of_birth" name="place_of_birth" placeholder="" value="" required>
+
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
+            <label style="font-size:20px;" for="country_birth">Select your country of birth</label>
+            <select style="border-radius:20px;" id="country_birth" name="country_birth" class="bfh-countries form-control" data-country="US" data-flags="true" required></select>
+            <br><br>
+            <label style="font-size:20px;" for="state_birth">Select your state of birth</label>
+            <select style="border-radius:20px;" id="state_birth" name="state_birth" class="bfh-states form-control" data-country="country_birth" required></select>
+          </div> 
+
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
+            <label style="font-size:20px;" for="state_residence">Select your state of residence in the U.S.</label>
+            <select style="border-radius:20px;" id="state_residence" name="state_residence" class="bfh-states form-control" data-country="US" required></select>
           </div>  
-          <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
-            <label style="font-size:20px;" for="place_of_residence">Enter your place of residence</label>
-            <input style="border-radius:20px;" type="text" class="form-control" id="place_of_residence" name="place_of_residence" placeholder="" value="" required>
-          </div>  
-          <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
+
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
             <label style="font-size:20px;" for="gender">Select your gender</label>
 
             <label style="margin-left:50px;margin-right:50px;">
@@ -140,9 +183,14 @@
               </svg>
               Other
             </label>
+
+            <label style="margin-right:50px;margin-top:20px;">
+              <input type="radio" name="gender" id="gender" value="rather_not_say">
+              I'd rather not say
+            </label>
           </div> 
 
-          <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
             <label style="font-size:20px;" for="slider" style="margin-right:50px;">I identify on the following position of the political spectrum </label>
             <br>
             <br>
@@ -155,7 +203,7 @@
               <label style="font-size:20px;margin-top:50px;" for="no"><input class="check" type="checkbox" name="no" id="no"> I'd rather not state my political identification</label>
           </div>  
 
-          <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;">
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
               <label style="font-size:20px;text-align:left;">This project covered a variety of topics that may cause certain participants to feel uncomfortable. 
                  Please tick the checkboxes next to any topic that you were not comfortable answering (or being asked about).</label>
                 <br>
@@ -166,29 +214,77 @@
                 <label style="display: block;" for="topic4"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic4" name="topic" value="body_weight"> Body-weight</label>
                 <label style="display: block;" for="topic5"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic5" name="topic" value="climate_change"> Climate change</label>
                 <label style="display: block;" for="topic6"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic6" name="topic" value="future"> The Future</label>
-                <label style="display: block;" for="topic6"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic6" name="topic" value="getting_older"> Getting older</label>
-                <label style="display: block;" for="topic6"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic6" name="topic" value="security"> Safety and Security</label>
-                <label style="display: block;" for="topic6"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic6" name="topic" value="relationships"> Relationships</label>
+                <label style="display: block;" for="topic7"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic7" name="topic" value="getting_older"> Getting older</label>
+                <label style="display: block;" for="topic8"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic8" name="topic" value="security"> Safety and Security</label>
+                <label style="display: block;" for="topic9"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic9" name="topic" value="relationships"> Relationships</label>
                 
-                <label style="display: block;" for="topic7"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic7" name="verdict" value="all_uncomfortable"> All of the above</label>
-                <br><label style="display: block;" for="topic8"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic8" name="verdict" value="all_comfortable"> None of the topics were uncomfortable to me</label>
+                <label style="display: block;" for="topic10"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic10" name="verdict" value="all_uncomfortable"> All of the above</label>
+                <br><label style="display: block;" for="topic11"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic11" name="verdict" value="all_comfortable"> None of the topics were uncomfortable to me</label>
+                <p class="py-2 text-danger" id="errorTextbox"></p>
                 </div>
           </div>
-          <div class="row" style="border:solid lightblue;border-radius:20px;padding:20px;font-size:20px;">
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;font-size:20px;">
             <div style="display:block;"><label for="feedback">You may leave any additional feedback for the research team regarding this survey or project here</label>
             </div>
             <br>
-            <div>
-            <textarea required style="border-radius:20px;" id="feedback" name="feedback" rows="4" cols="110"></textarea>
+            <div class="form-group">
+            <textarea class="form-control" style="border-radius:20px;" id="exampleFormControlTextarea1" id="feedback" name="feedback" rows="3" cols="150"></textarea>
             </div>
           </div>
           <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
+          <input type="hidden" id="p1" name="p1" value="">
+          <input type="hidden" id="p2" name="p2" value="">
+          <input type="hidden" id="p3" name="p3" value="">
           <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">        
         </form>
         </div>
     </div>
 </div>
 </body>
+<script>
+function submitForm() {
+  var topic1 = document.getElementById('topic1').checked;
+  var topic2 = document.getElementById('topic2').checked;
+  var topic3 = document.getElementById('topic3').checked;
+  var topic4 = document.getElementById('topic4').checked;
+  var topic5 = document.getElementById('topic5').checked;
+  var topic6 = document.getElementById('topic6').checked;
+  var topic7 = document.getElementById('topic7').checked;
+  var topic8 = document.getElementById('topic8').checked;
+  var topic9 = document.getElementById('topic9').checked;
+  var topic10 = document.getElementById('topic10').checked;
+  var topic11 = document.getElementById('topic11').checked;
+  var error = document.getElementById('errorTextbox').innerHTML;
+
+  if(topic1 || topic2 || topic3 || topic4 || topic5 || topic6 || topic7 || topic8 || topic9 || topic10 || topic11){
+    if(topic10 && topic11){
+      alert("You may select 'All of the above' or 'None of the above', not both");
+      document.getElementById('errorTextbox').innerHTML = "Error: You may select 'All of the above' or 'None of the above', not both";
+      return false;
+    }
+    else if(topic11 && (topic1 || topic2 || topic3 || topic4 || topic5 || topic6 || topic7 || topic8 || topic9)){
+      alert("You cannot select 'None of the above' and mark any of the given topics simultaneously");
+      document.getElementById('errorTextbox').innerHTML = "Error: You cannot select 'None of the above' and mark any of the given topics simultaneously";
+      return false;
+    }
+    else if(topic10 && (topic1 || topic2 || topic3 || topic4 || topic5 || topic6 || topic7 || topic8 || topic9)){
+      alert("You cannot select 'All of the above' and mark any of the given topics simultaneously");
+      document.getElementById('errorTextbox').innerHTML = "Error: You cannot select 'All of the above' and mark any of the given topics simultaneously";
+      return false;
+    }
+    else{
+      document.getElementById("p1").value = document.getElementById("country_birth").options[document.getElementById("country_birth").selectedIndex].innerHTML;
+      document.getElementById("p2").value = document.getElementById("state_birth").options[document.getElementById("state_birth").selectedIndex].innerHTML;
+      document.getElementById("p3").value = document.getElementById("state_residence").options[document.getElementById("state_residence").selectedIndex].innerHTML;
+      return true;
+    }
+  } else{
+    alert("Please tick atleast one of the checkboxes before submitting");
+    document.getElementById('errorTextbox').innerHTML = "Error: Please tick atleast one of the checkboxes before submitting";
+    return false;
+  }
+}
+</script>
 
 </html>
 
