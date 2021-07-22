@@ -17,9 +17,8 @@
     <style>
 
     .image{
-        height:200px;
-        border-radius:100px;
-        width:200px;
+        border-radius:50%;
+        width:100%;
     }
 
     #sortable {
@@ -33,10 +32,10 @@
     display: block;
     float: left;
     height: 100%;
-    width: 200px;
+    width: 13.5%;
     box-sizing: border-box; /* keep padding/border inside height/width */
-    border-radius:100px;
-    margin:20px;
+    border-radius:50%;
+    margin:1.5%;
     font-size:20px;
     }
 
@@ -84,7 +83,7 @@
         </div>
       </div>
     </header>
-<div style="margin-left:44px;margin-right:44px;">
+<div style="margin-left:3%;margin-right:3%;" class="form-group">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
@@ -95,16 +94,15 @@
             <div class="row">
 
                 <div id='sortable'>
-                    <div class='item' id="doctor" name="doctor"><img class="image" src="https://images.theconversation.com/files/304957/original/file-20191203-66986-im7o5.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"><br>Doctor</div>
-                    <div class='item' id="makeup_artist" name="makeup_artist"><img class="image" src="https://cdn2.howtostartanllc.com/images/business-ideas/business-idea-images/makeup-artist-business.jpg"><br>Makeup Artist</div>
-                    <div class='item' id="software_developer" name="software_developer"><img class="image" src="https://savvycomsoftware.com/wp-content/uploads/2019/07/software-developers-engineer-1.jpg"><br>Software Developer</div>
-                    <div class='item' id="dentist" name="dentist"><img class="image" src="https://c.files.bbci.co.uk/2291/production/_110894880_gettyimages-1055182908.jpg"><br>Dentist</div>
-                    <div class='item' id="priest" name="priest"><img class="image" src="https://api.time.com/wp-content/uploads/2017/06/the-god-squad-ryan-pfluger-young-priest.jpg"><br>Priest</div>
-                    <div class='item' id="teacher" name="teacher"><img class="image" src="https://marvel-b1-cdn.bc0a.com/f00000000026007/resilienteducator.com/wp-content/uploads/sites/34/2014/11/math-teacher.jpg"><br>Teacher</div>
+                    <div class='item' id="doctor" name="doctor"><img class="image" src="/images/occupations/doctor.jpg"><br>Doctor</div>
+                    <div class='item' id="makeup_artist" name="makeup_artist"><img class="image" src="/images/occupations/makeup.jpg"><br>Makeup Artist</div>
+                    <div class='item' id="software_developer" name="software_developer"><img class="image" src="/images/occupations/cse.jpg"><br>Software Developer</div>
+                    <div class='item' id="dentist" name="dentist"><img class="image" src="/images/occupations/dentist.jpg"><br>Dentist</div>
+                    <div class='item' id="priest" name="priest"><img class="image" src="/images/occupations/priest.jpg"><br>Priest</div>
+                    <div class='item' id="teacher" name="teacher"><img class="image" src="/images/occupations/teacher.jpg"><br>Teacher</div>
                 </div>
             </div>
-            <br>
-            <img src="\images\lines\line2.JPG" style="margin-left:-25px;width:104%;transform: scaleY(-1);margin-bottom:30px;">
+            <img src="\images\lines\line2.JPG" style="margin-left:-1.5%;width:104%;transform: scaleY(-1);margin-bottom:30px;margin-top:60px;">
             <p style="float:left;"><strong style="margin-left:50px;">Lowest hourly income</strong>
             <br>
             <br>
@@ -121,7 +119,7 @@
             </p>
             <br><br><br><br><br><br><br>
 
-            <form id="subForm" action="/activity3/{{ userID }}/" method="POST">
+            <form id="subForm" class="form-group" action="/activity3/{{ userID }}/" method="POST">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">

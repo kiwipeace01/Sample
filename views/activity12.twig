@@ -21,9 +21,11 @@
 
     #sortable,#sortable1 { 
         list-style-type: none;
-        margin: 40px; padding: 15px;
+        margin: 3%; 
+        padding: 15px;
         width: 40%; 
     }
+
     #sortable li,#sortable1 li { 
         margin: 15px;
         padding: 5px; 
@@ -119,7 +121,7 @@
         </div>
       </div>
     </header>
-<div style="margin-left:44px;margin-right:44px;">
+<div style="margin-left:3%;margin-right:3%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
@@ -127,7 +129,7 @@
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
         
         <div>
-            <h3 style="margin-left:53%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
             <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
                 <ul id="sortable1" class="connectedSortable">
                 <li id="best_friend" name="best_friend" class="ui-state-default">My best friend</li>
@@ -140,7 +142,7 @@
                 <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
                 </ul>
             </div>
-            <h3 style="margin-left:53%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
 
             <form id="subForm" action="/activity13/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>

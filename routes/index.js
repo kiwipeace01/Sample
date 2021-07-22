@@ -30,7 +30,7 @@ const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
 router.get('/', function (req, res, next) {
-    res.render('index');
+    res.render('activity1');
 });
 
 

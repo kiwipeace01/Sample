@@ -28,22 +28,27 @@
     #sortable {
     display: block;
     border-width: 6px 0;
-    padding: 4px 0;
-    height: 250px;
+    height: 100%;
+    width:100%;
     }
 
     .item {
     display: block;
     float: left;
-    height: 250px;
-    width: auto;
+    width: 15.85%;
     box-sizing: border-box; /* keep padding/border inside height/width */
-    margin:7px;
+    margin:0.4%;
     font-size:20px;
     }
 
     p{
         font-size:20px;
+    }
+
+    .style{
+        width:100%;
+        height:auto;
+        margin-left:-5px;
     }
 
     </style>
@@ -83,7 +88,7 @@
         </div>
       </div>
     </header>
-<div style="margin-left:44px;margin-right:44px;">
+<div style="margin-left:2%;margin-right:2%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
@@ -92,20 +97,17 @@
 
         <div>
             <div class="row">
-
-                <div id='scrollable'>
                 <div id='sortable'>
-                    <div class='item' id="garbage" name="garbage"><img src="\images\harmful\garbage.png"><br>Garbage</div>
-                    <div class='item' id="oilspill" name="oilspill"><img src="\images\harmful\oilspill.png"><br>Oil spills</div>
-                    <div class='item' id="industry" name="industry"><img src="\images\harmful\industry.png"><br>Industry</div>
-                    <div class='item' id="energy_production" name="energy_production"><img src="\images\harmful\energy.png"><br>Energy Production</div>
-                    <div class='item' id="transportation" name="transportation"><img src="\images\harmful\transportation.png"><br>Transportation</div>
-                    <div class='item' id="cattle" name="cattle"><img src="\images\harmful\cattle.png"><br>Cattle</div>
-                </div>
+                    <div class='item' id="garbage" name="garbage"><img class="style" src="\images\harmful\garbage.png"><br>Garbage</div>
+                    <div class='item' id="oilspill" name="oilspill"><br><br><img class="style" src="\images\harmful\oilspill.png"><br>Oil spills</div>
+                    <div class='item' id="industry" name="industry"><br><img class="style" src="\images\harmful\industry.png"><br>Industry</div>
+                    <div class='item' id="energy_production" name="energy_production"><img class="style" src="\images\harmful\energy.png"><br>Energy Production</div>
+                    <div class='item' id="transportation" name="transportation"><br><br><img class="style" src="\images\harmful\transportation.png"><br>Transportation</div>
+                    <div class='item' id="cattle" name="cattle"><img class="style" src="\images\harmful\cattle.png"><br>Cattle</div>
                 </div>
             </div>
 
-            <img src="\images\lines\line4.JPG" style="margin-left:-40px;width:106%;margin-bottom:30px;height:auto;">
+            <img src="\images\lines\line4.JPG" style="margin-left:-4.5%;width:108%;margin-bottom:30px;height:auto;">
             <p style="float:left;"><strong>Least harmful</strong>
             <br>
             <br>
