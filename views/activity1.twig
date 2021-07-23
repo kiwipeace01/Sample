@@ -11,248 +11,69 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script type="text/javascript" src="/javascripts/loadactivity.js"></script>   
+
     <style>
 
-    #sortable1{
-        border: 1px solid #eee;
-        width: 10%;
-        min-height: 20px;
-        list-style-type: none;
-        margin: 0;
-        padding: 2px 0 0 0;
-        float: left;
-        margin-right: 10px;
-        border-radius:5px;
-    }
-    #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9, #sortable10, #sortable11 {
-        border: 1px solid #eee;
-        width: 8%;
-        min-height: 20px;
-        list-style-type: none;
-        margin: 0;
-        padding: 2px 0 0 0;
-        float: left;
-        margin-right: 10px;
-        background-color: lightblue;
-        border-radius:5px;
-    }
-    
-    #sortable1 li {
-        margin: 0 5px 5px 5px;
-        padding: 4px;
-        border-radius:5px;
+    .images{
+        height:100%;
+        width:100%;
     }
 
-    #sortable2 li, #sortable3 li, #sortable4 li, #sortable5 li, #sortable6 li, #sortable7 li, #sortable8 li, #sortable9 li, #sortable10 li, #sortable11 li {
-        margin: 0 5px 5px 5px;
-        padding: 4px;
-        border-radius:5px;
+    #sortable {
+    display: block;
+    border-width: 6px 0;
+    padding: 4px 0;
+    height: 5%;
+    width:100%;
     }
-    
+
+    .item {
+    display: block;
+    float: left;
+    width: 11%;
+    height:20%;
+    box-sizing: border-box; /* keep padding/border inside height/width */
+    margin:0.7%;
+    font-size:20px;
+    }
+
+    .style{
+        height:450px;
+        margin-bottom:50px;/*Cehck thsi*/
+        width:auto;
+        margin-left:-50px;
+    }
+
+
     p{
         font-size:20px;
     }
 
     </style>
-
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-
-    var first = [];
-    var second = [];
-    var third = [];
-    var fourth = [];
-    var fifth = [];
-    var sixth = [];
-    var seventh = [];
-    var eighth = [];
-    var ninth = [];
-    var tenth = [];
-
-    $( function() {
-
-        $( "#sortable1" ).sortable({
-            connectWith: ".connectedSortable"
-        }).disableSelection();
-
-        $( "#sortable2" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                first.push(ui.item.context.id)
-                $("#first").val(first)
-            },
-            remove: function( event, ui ) {
-                first = first.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
+    $(function() {
+        $( '#sortable' ).sortable({
+            axis:'x',
+            update: function( event, ui ) {
+                idsInOrder = [];
+                $('#sortable div').each(function() {
+                    idsInOrder.push($(this).attr('id'));
                 });
-                $("#first").val(first)
+                $('#order').val(idsInOrder);
             }
-
-        }).disableSelection();
-
-        $( "#sortable3" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                second.push(ui.item.context.id)
-                $("#30-35k").val(second)
-            },
-            remove: function( event, ui ) {
-                second = second.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#30-35k").val(second)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable4" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                third.push(ui.item.context.id)
-                $("#25-30k").val(third)
-            },
-            remove: function( event, ui ) {
-                third = third.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#25-30k").val(third)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable5" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                fourth.push(ui.item.context.id)
-                $("#20-25k").val(fourth)
-            },
-            remove: function( event, ui ) {
-                fourth = fourth.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#20-25k").val(fourth)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable6" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                fifth.push(ui.item.context.id)
-                $("#15-20k").val(fifth)
-            },
-            remove: function( event, ui ) {
-                fifth = fifth.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#15-20k").val(fifth)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable7" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                sixth.push(ui.item.context.id)
-                $("#10-15k").val(sixth)
-            },
-            remove: function( event, ui ) {
-                sixth = sixth.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#10-15k").val(sixth)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable8" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                seventh.push(ui.item.context.id)
-                $("#7_5-10k").val(seventh)
-            },
-            remove: function( event, ui ) {
-                seventh = seventh.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#7_5-10k").val(seventh)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable9" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                eighth.push(ui.item.context.id)
-                $("#5-7_5k").val(eighth)
-                
-            },
-            remove: function( event, ui ) {
-                eighth = eighth.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#5-7_5k").val(eighth)
-                
-            }
-
-        }).disableSelection();
-
-        $( "#sortable10" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                ninth.push(ui.item.context.id)
-                $("#3-5k").val(ninth)
-            },
-            remove: function( event, ui ) {
-                ninth = ninth.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#3-5k").val(ninth)
-            }
-
-        }).disableSelection();
-
-        $( "#sortable11" ).sortable({
-            connectWith: ".connectedSortable",
-            receive: function( event, ui ) {
-                tenth.push(ui.item.context.id)
-                $("#1-3k").val(tenth)
-            },
-            remove: function( event, ui ) {
-                tenth = tenth.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-                $("#1-3k").val(tenth)
-            }
-
-        }).disableSelection();
-
-
+        });
     });
-
-    function submitAll() {
-        var sum = first.length + second.length + third.length + fourth.length + fifth.length + sixth.length + seventh.length + eighth.length + ninth.length + tenth.length;
-        if(sum==13){
-            return true;
-        } else{
-            //alert(first.length +"\ "+ second.length+"\ "+third.length+"\ "+fourth.length+"\ "+fifth.length+"\ "+sixth.length+"\ "+seventh.length+"\ "+eighth.length+"\ "+ninth.length+"\ "+tenth.length)
-            alert("Please drag and drop all the occupations into the blue areas");
-            return false;
-        }
-    }
-
-    var userID = '{{ userID }}';
 
 
     </script>
-
-
-
 </head>
-
 <body>
     <header style="background-color: #38a3a5;">
       <div class="px-3 py-2 text-white">
@@ -264,101 +85,112 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - Exercise 1 of 14</span>
+              <span style="font-size:30px;">Split Consensus - 1 of 14</span>
             </a>
           </div>
         </div>
       </div>
     </header>
-<div style="margin-left:2%;margin-right:2%;align-content:center;display: block;">
+<div style="margin-left:2%;margin-right:2%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Please drag and drop the given occupations into the given areas according to how much you think they earn on a monthly basis</b></p>
+        <p><b>Please rearrange the following women to sort them based on how much you think they weigh.</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
 
         <div>
             <div class="row">
-                        <ul id="sortable1" class="connectedSortable">
-                        <li class="ui-state-default" id="us_president">US President</li>
-                        <li class="ui-state-default" id="orthodontist">Orthodontist</li>
-                        <li class="ui-state-default" id="us_vicepresident">US Vicepresident</li>
-                        <li class="ui-state-default" id="dentist">Dentist</li>
-                        <li class="ui-state-default" id="lawyer">Lawyer</li>
-                        <li class="ui-state-default" id="software_developer">Software Developer</li>
-                        <li class="ui-state-default" id="makeup_artist">Makeup Artist</li>
-                        <li class="ui-state-default" id="highschool_teacher">High school teacher</li>
-                        <li class="ui-state-default" id="arts_design_media">Arts, Design, Entertainment, Sports, and Media Occupations</li>
-                        <li class="ui-state-default" id="firefighter">Firefighter</li>
-                        <li class="ui-state-default" id="legislator">Legislator</li>
-                        <li class="ui-state-default" id="hairdresser">Barber, hairdresser</li>
-                        <li class="ui-state-default" id="cashier">Cashier</li>
-                        </ul>
-
-                        <ul id="sortable2" class="connectedSortable">
-                        $35k+ 
-                        </ul>  
-
-                        <ul id="sortable3" class="connectedSortable">
-                        $30-35k
-                        </ul>
-
-                        <ul id="sortable4" class="connectedSortable">
-                        $25-30k
-                        </ul>
-
-                        <ul id="sortable5" class="connectedSortable">
-                        $20-25k
-                        </ul>
-
-                        <ul id="sortable6" class="connectedSortable">
-                        $15-20k
-                        </ul>
-
-                        <ul id="sortable7" class="connectedSortable">
-                        $10-15k
-                        </ul>
-
-                        <ul id="sortable8" class="connectedSortable">
-                        $7.5-10k
-                        </ul>
-
-                        <ul id="sortable9" class="connectedSortable">
-                        $5-7.5k
-                        </ul>
-
-                        <ul id="sortable10" class="connectedSortable">
-                        $3-5k
-                        </ul>
-
-                        <ul id="sortable11" class="connectedSortable">
-                        $1-3k
-                        </ul>
+                <div id='sortable'>
+                    <div class='item' id="girl1" name="girl1"><img class="style" src="\images\women\girl11.png"></div>
+                    <div class='item' id="girl2" name="girl2"><img class="style" src="\images\women\girl22.png"></div>
+                    <div class='item' id="girl3" name="girl3"><img class="style" src="\images\women\girl33.png"></div>
+                    <div class='item' id="girl4" name="girl4"><img class="style" src="\images\women\girl44.png"></div>
+                    <div class='item' id="girl5" name="girl5"><img class="style"src="\images\women\girl55.png"></div>
+                    <div class='item' id="girl6" name="girl6"><img class="style" src="\images\women\girl66.png"></div>
+                    <div class='item' id="girl7" name="girl7"><img class="style" src="\images\women\girl77.png"></div>
+                    <div class='item' id="girl8" name="girl8"><img class="style" src="\images\women\girl88.png"></div>
+                </div>
             </div>
-            <form id="subForm" action="/activity2/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+            <img src="\images\lines\line3.JPG" style="margin-left:-2.5%;width:107%;transform: scaleY(-1);margin-bottom:30px;margin-top:-2%;">
+            <p style="float:left;"><strong style="margin-left:50px;">Least weight</strong>
+            <br>
+            <br>
+            <img class="images" src="\images\minus.jpg" style="width:70px;height:70px;border-radius:100px;">
+            <img class="images" src="\images\weight.png" style="width:100px;height:100px;border-radius:100px;">
+            </p> 
+
+
+            <p style="float:right;"><strong style="margin-right:50px;">Most weight</strong>
+            <br>
+            <br>
+            <img class="images" src="\images\plus.jpg" style="width:70px;height:70px;border-radius:100px;">
+            <img class="images" src="\images\weight.png" style="width:100px;height:100px;border-radius:100px;">
+            </p>
+            <br><br><br><br><br><br><br>
+
+            <form id="subForm" action="/activity2/{{ userID }}/" method="POST">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
-                <input type="hidden" id="first" name="thirtyFiveThousand" value="">
-                <input type="hidden" id="30-35k" name="thirtyThousand" value="">
-                <input type="hidden" id="25-30k" name="twentyFiveThousand" value="">
-                <input type="hidden" id="20-25k" name="twentyThousand" value="">
-                <input type="hidden" id="15-20k" name="fifteenThousand" value="">
-                <input type="hidden" id="10-15k" name="tenThousand" value="">
-                <input type="hidden" id="7_5-10k" name="sevenThousandFiveHundred" value="">
-                <input type="hidden" id="5-7_5k" name="fiveThousand" value="">
-                <input type="hidden" id="3-5k" name="threeThousand" value="">
-                <input type="hidden" id="1-3k" name="oneThousand" value="">
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
+                <input type="hidden" id="order" name="order" value="">
+                <input type="hidden" id="extra" name="extra" value="">
                 <input type="hidden" id="sec" name="sec" value=""> 
-                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit" name="submitButton">
             </form>
         </div>
 
     </div>
 </div>
 
-
 </body>
-
 <script>
+function startTimer2(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc2, 1000)
+
+
+            function sendFunc2(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+             document.forms.item(0).submit();
+               
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            // if(minutes==1){
+            //     document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            // } else{
+            //     document.getElementById('sec').value = (1)+":"+(60-seconds)
+            // }
+
+            document.getElementById('extra').value = (30-seconds);
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
 function startTimer(duration, display, captionText,userID) {
     var timer = duration, minutes, seconds;
 
@@ -370,19 +202,31 @@ function startTimer(duration, display, captionText,userID) {
 
             clearInterval(timeChange)
 
-            setTimeout(sendFunc, 1000)
+            // setTimeout(sendFunc, 1000)
 
-            document.getElementById("canvas").style.visibility = "hidden";
-            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
-            display.textContent = " 00:00";
+            var check = confirm("Would you like an 30 extra seconds to answer your question?");
+            if(check){
+                startTimer2(30, display, captionText,userID);
+                document.getElementById("submitButton").style.visibility = "visible";
+                document.getElementById("errorText1").innerHTML = "You have an extra 30 seconds to answer the question";
+                document.getElementById("errorText2").innerHTML = "You have an extra 30 seconds to answer the question";
+            }
+            else{
+                setTimeout(sendFunc, 1000);
+                document.getElementById("canvas").style.visibility = "hidden";
+                document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+                display.textContent = " 00:00";
 
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
 
 
             function sendFunc(){
             //    sendData(userID, 0, -1,"-1%",-1)
-               document.forms.item(0).submit()
+                if(!check){
+                    document.forms.item(0).submit();
+                }          
             }
 
             return
@@ -394,9 +238,9 @@ function startTimer(duration, display, captionText,userID) {
             seconds = seconds < 10 ? "0" + seconds : seconds;
             display.textContent = minutes + ":" + seconds;
             if(minutes==1){
-                document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+                document.getElementById('sec').value = (1-minutes)+":"+(60-seconds)
             } else{
-                document.getElementById('sec').value = (1)+":"+(60-seconds)
+                document.getElementById('sec').value = (0)+":"+(60-seconds)
             }
             
 

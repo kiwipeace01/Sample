@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
+
     #sortable,#sortable1 { 
         list-style-type: none;
         margin: 3%; 
         padding: 15px;
         width: 40%; 
     }
-
     #sortable li,#sortable1 li { 
         margin: 15px;
         padding: 5px; 
@@ -61,7 +61,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    items=["state","family","friends","spouse","myself","children"]
+    items=["world_pandemic","world_peace","space_tourism","global_gender_equality","water_world_war","economic_equality","machines_takeover","north_south_pole_disappear"]
 
     $(function() {
         $( '#sortable' ).sortable({
@@ -96,7 +96,7 @@
         if(sum==0){
             return true;
         } else{
-            alert("Please drag and drop all the people into the blue area");
+            alert("Please drag and drop all the scenarios into the blue area");
             return false;
         }
     }
@@ -124,38 +124,89 @@
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Drag and drop the following people from the grey box to the blue box based on who you think will end up taking care of you once you turn 70, ordering them from most likely to least likely</b></p>
+        <p><b>Drag and drop the following events from the grey box to the blue box, ordering them from most likely to least likely to happen.</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
         
-        <div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
-            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
+            <h3 style="margin-left:53.5%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
+            
+            <div class="row" style="margin-left:7%;margin-right:-2%;text-align:center;">
                 <ul id="sortable1" class="connectedSortable">
-                <li id="state" name="state" class="ui-state-default">The state</li>
-                <li id="family" name="family" class="ui-state-default">Family</li>
-                <li id="friends" name="friends" class="ui-state-default">Friends</li>
-                <li id="spouse" name="spouse" class="ui-state-default">My spouse</li>
-                <li id="myself" name="myself" class="ui-state-default">Myself</li>
-                <li id="children" name="children" class="ui-state-default">My children</li>
+                <li id="world_pandemic" name="world_pandemic" class="ui-state-default">Another world pandemic</li>
+                <li id="world_peace" name="world_peace" class="ui-state-default">World peace</li>
+                <li id="space_tourism" name="space_tourism" class="ui-state-default">Space tourism</li>
+                <li id="global_gender_equality" name="global_gender_equality" class="ui-state-default">Global gender equality</li>
+                <li id="water_world_war" name="water_world_war" class="ui-state-default">World war over water</li>
+                <li id="economic_equality" name="economic_equality" class="ui-state-default">Close income gap (economic inequality)</li>
+                <li id="machines_takeover" name="machines_takeover" class="ui-state-default">Machines taking over the world</li>
+                <li id="north_south_pole_disappear" name="north_south_pole_disappear" class="ui-state-default">North and south pole dissapearing</li>
                 </ul>
                 <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
                 </ul>
             </div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
+            <h3 style="margin-left:53.5%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
 
             <form id="subForm" action="/activity11/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">
                 <input type="hidden" id="sec" name="sec" value=""> 
+                <input type="hidden" id="extra" name="extra" value="">
             </form>
-        </div>
 
     </div>
 </div>
 
 </body>
 <script>
+function startTimer2(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc2, 1000)
+
+
+            function sendFunc2(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+             document.forms.item(0).submit();
+               
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            // if(minutes==1){
+            //     document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            // } else{
+            //     document.getElementById('sec').value = (1)+":"+(60-seconds)
+            // }
+
+            document.getElementById('extra').value = (30-seconds);
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
 function startTimer(duration, display, captionText,userID) {
     var timer = duration, minutes, seconds;
 
@@ -167,19 +218,31 @@ function startTimer(duration, display, captionText,userID) {
 
             clearInterval(timeChange)
 
-            setTimeout(sendFunc, 1000)
+            // setTimeout(sendFunc, 1000)
 
-            document.getElementById("canvas").style.visibility = "hidden";
-            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
-            display.textContent = " 00:00";
+            var check = confirm("Would you like an 30 extra seconds to answer your question?");
+            if(check){
+                startTimer2(30, display, captionText,userID);
+                document.getElementById("submitButton").style.visibility = "visible";
+                document.getElementById("errorText1").innerHTML = "You have an extra 30 seconds to answer the question";
+                document.getElementById("errorText2").innerHTML = "You have an extra 30 seconds to answer the question";
+            }
+            else{
+                setTimeout(sendFunc, 1000);
+                document.getElementById("canvas").style.visibility = "hidden";
+                document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+                display.textContent = " 00:00";
 
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
 
 
             function sendFunc(){
             //    sendData(userID, 0, -1,"-1%",-1)
-               document.forms.item(0).submit()
+                if(!check){
+                    document.forms.item(0).submit();
+                }          
             }
 
             return

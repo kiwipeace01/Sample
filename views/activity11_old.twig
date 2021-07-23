@@ -25,6 +25,7 @@
         padding: 15px;
         width: 40%; 
     }
+
     #sortable li,#sortable1 li { 
         margin: 15px;
         padding: 5px; 
@@ -61,7 +62,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    items=["police","3_women","3_men_and_3_women","no_people","3_men"]
+    items=["good_sexual_life","financial_security","gives_family","attractive_to_me","effective_communicator","same_interests"]
 
     $(function() {
         $( '#sortable' ).sortable({
@@ -96,7 +97,7 @@
         if(sum==0){
             return true;
         } else{
-            alert("Please drag and drop all the scenarios into the blue area");
+            alert("Please drag and drop all the characteristics into the blue area");
             return false;
         }
     }
@@ -114,7 +115,7 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - Exercise 2 of 14</span>
+              <span style="font-size:30px;">Split Consensus - Exercise 11 of 14</span>
             </a>
           </div>
         </div>
@@ -124,25 +125,26 @@
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>It's 11 pm and you are heading alone to your car, which you parked 3 blocks away. Which of the following scenarios makes you feel more secure? Drag and drop the scenarios from the grey box to the blue box, ordering them from scenarios that make you feel most comfortable to least comfortable</b></p>
+        <p><b>Drag and drop the following characteristics that you think your spouse should posses from the grey box to the blue box, ordering them from most important to least important</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
         
         <div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most comfortable</h3>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most important</h3>
             <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
                 <ul id="sortable1" class="connectedSortable">
-                <li id="3_women" name="3_women" class="ui-state-default">Finding a group of 3 women</li>
-                <li id="3_men_and_3_women" name="3_men_and_3_women" class="ui-state-default">Finding a group of 3 men and 3 women</li>
-                <li id="no_people" name="no_people" class="ui-state-default">No people at all</li>
-                <li id="police" name="police" class="ui-state-default">Finding a police patrol</li>
-                <li id="3_men" name="3_men" class="ui-state-default">Finding a group of 3 men</li>
+                <li id="good_sexual_life" name="good_sexual_life" class="ui-state-default">Commits to a good sexual life</li>
+                <li id="financial_security" name="financial_security" class="ui-state-default">Guarantees financial security</li>
+                <li id="gives_family" name="gives_family" class="ui-state-default">Gives me a family</li>
+                <li id="attractive_to_me" name="attractive_to_me" class="ui-state-default">I find attractive</li>
+                <li id="effective_communicator" name="effective_communicator" class="ui-state-default">Communicates effectively</li>
+                <li id="same_interests" name="same_interests" class="ui-state-default">Has the same interests </li>
                 </ul>
                 <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
                 </ul>
             </div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least comfortable</h3>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least important</h3>
 
-            <form id="subForm" action="/activity3/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+            <form id="subForm" action="/activity12/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">

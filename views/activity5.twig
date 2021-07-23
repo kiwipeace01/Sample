@@ -19,51 +19,88 @@
 
     <style>
 
-    img{
-        border-radius:200px;
-        width:100%;
+    #sortable,#sortable1 { 
+        list-style-type: none;
+        margin: 3%; 
+        padding: 15px;
+        width: 40%; 
     }
 
-    #sortable {
-    display: block;
-    border-width: 6px 0;
-    padding: 4px 0;
-    height: 90%;
-    width:100%;
+    #sortable li,#sortable1 li { 
+        margin: 15px;
+        padding: 5px; 
+        font-size: 20px; 
+        height: 2em;
+        border-radius:7px;
     }
 
-    .item {
-    display: block;
-    float: left;
-    height: 100%;
-    width: 10.5%;
-    box-sizing: border-box; /* keep padding/border inside height/width */
-    margin:0.9%;
-    font-size:20px;
+    html>body #sortable li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+    html>body #sortable1 li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
+    .ui-state-highlight { 
+        height: 2em; 
+        line-height: 1.2em; 
     }
 
     p{
         font-size:20px;
     }
 
+    ul{
+        background-color:lightgrey;
+        padding:10px;
+        border-radius:7px;
+    }
     </style>
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+    items=["best_friend","family","specialist","love_partner","friends","lawyer"]
 
     $(function() {
         $( '#sortable' ).sortable({
-            axis:'x',
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
             update: function( event, ui ) {
                 idsInOrder = [];
-                $('#sortable div').each(function() {
+                $('#sortable li').each(function() {
                     idsInOrder.push($(this).attr('id'));
                 });
                 $('#order').val(idsInOrder);
             }
         });
-    });
+        $( "#sortable" ).disableSelection();
 
+        $( "#sortable1" ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            receive: function( event, ui ) {
+                items.push(ui.item.context.id)
+            },
+            remove: function( event, ui ) {
+                items = items.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+            }
+
+        }).disableSelection();
+    });
+    function submitAll() {
+        var sum = items.length;
+        if(sum==0){
+            return true;
+        } else{
+            alert("Please drag and drop all the people into the blue area");
+            return false;
+        }
+    }
 
     </script>
 </head>
@@ -84,47 +121,35 @@
         </div>
       </div>
     </header>
-<div style="margin-left:2%;margin-right:2%;">
+<div style="margin-left:3%;margin-right:3%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Consider the following proposals that could help the environment recover from pollution. Please order them from which you think would have the most impact to the least impact?</b></p>
+        <p><b>Drag and drop the following people from the grey box to the blue box, ordering them from who you think you are most likely to turn to if you're having trouble with your love partner, to least likely.</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
-
-            <div class="row">
-                <div id='sortable'>
-                    <div id="recycling" name="recycling" class='item'><img src="/images/solutions/recycle.jpg"><br>Recycling</div>
-                    <div id="noCar_culture" name="noCar_culture" class='item'><img src="/images/solutions/car.jpg"><br>No-car culture</div>
-                    <div id="local_consumption" name="local_consumption" class='item'><img src="/images/solutions/veg.jpg"><br>Local consumption</div>
-                    <div id="civilian_demands" name="civilian demands" class='item'><img src="/images/solutions/crowd.jpg"><br>Civilian demands</div>
-                    <div id="industry_regulations" name="industry_regulations" class='item'><img src="/images/solutions/industry.jpg"><br>Industry regulations</div>
-                    <div id="alternative_energies" name="alternative_energies" class='item'><img src="/images/solutions/energy.jpg"><br>Alternative energies</div>
-                    <div id="picking_up_garbage" name="picking_up_garbage" class='item'><img src="/images/solutions/garbage.jpg"><br>Pick up existing garbage</div>
-                    <div id="reforestation" name="reforestation" class='item'><img src="/images/solutions/plant.jpg"><br>Reforestation</div>
-                </div>
+        
+        <div>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
+            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
+                <ul id="sortable1" class="connectedSortable">
+                <li id="best_friend" name="best_friend" class="ui-state-default">My best friend</li>
+                <li id="family" name="family" class="ui-state-default">My family</li>
+                <li id="specialist" name="specialist" class="ui-state-default">A specialist</li>
+                <li id="friends" name="friends" class="ui-state-default">My friends</li>
+                <li id="love_partner" name="love_partner" class="ui-state-default">My love-partner</li>
+                <li id="lawyer" name="lawyer" class="ui-state-default">A lawyer</li>
+                </ul>
+                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
+                </ul>
             </div>
-            <img src="\images\lines\line5.JPG" style="margin-left:-3%;width:106%;margin-bottom:30px;height:auto;">
-            <p style="float:left;"><strong>Least impact</strong>
-            <br>
-            <br>
-            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
-            </p> 
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
 
-
-            <p style="float:right;"><strong>Most impact</strong>
-            <br>
-            <br>
-            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
-            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
-            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
-            </p>
-            <br><br><br><br><br><br><br>
-
-            <form id="subForm" action="/activity6/{{ userID }}/" method="POST">
+            <form id="subForm" action="/activity6/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">
                 <input type="hidden" id="sec" name="sec" value=""> 
+                <input type="hidden" id="extra" name="extra" value="">
             </form>
         </div>
 
@@ -133,6 +158,55 @@
 
 </body>
 <script>
+function startTimer2(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc2, 1000)
+
+
+            function sendFunc2(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+             document.forms.item(0).submit();
+               
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            // if(minutes==1){
+            //     document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            // } else{
+            //     document.getElementById('sec').value = (1)+":"+(60-seconds)
+            // }
+
+            document.getElementById('extra').value = (30-seconds);
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
 function startTimer(duration, display, captionText,userID) {
     var timer = duration, minutes, seconds;
 
@@ -144,19 +218,31 @@ function startTimer(duration, display, captionText,userID) {
 
             clearInterval(timeChange)
 
-            setTimeout(sendFunc, 1000)
+            // setTimeout(sendFunc, 1000)
 
-            document.getElementById("canvas").style.visibility = "hidden";
-            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
-            display.textContent = " 00:00";
+            var check = confirm("Would you like an 30 extra seconds to answer your question?");
+            if(check){
+                startTimer2(30, display, captionText,userID);
+                document.getElementById("submitButton").style.visibility = "visible";
+                document.getElementById("errorText1").innerHTML = "You have an extra 30 seconds to answer the question";
+                document.getElementById("errorText2").innerHTML = "You have an extra 30 seconds to answer the question";
+            }
+            else{
+                setTimeout(sendFunc, 1000);
+                document.getElementById("canvas").style.visibility = "hidden";
+                document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+                display.textContent = " 00:00";
 
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
 
 
             function sendFunc(){
             //    sendData(userID, 0, -1,"-1%",-1)
-               document.forms.item(0).submit()
+                if(!check){
+                    document.forms.item(0).submit();
+                }          
             }
 
             return
@@ -207,3 +293,4 @@ function startTimer(duration, display, captionText,userID) {
 
 </script>
 </html>
+

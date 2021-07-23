@@ -19,87 +19,55 @@
 
     <style>
 
-    #sortable,#sortable1 { 
-        list-style-type: none;
-        margin: 3%; 
-        padding: 15px;
-        width: 40%; 
-    }
-    #sortable li,#sortable1 li { 
-        margin: 15px;
-        padding: 5px; 
-        font-size: 20px; 
-        height: 2em;
-        border-radius:7px;
+    img{
+        height:180px;
+        margin-left:23px;
+        width:auto;
     }
 
-    html>body #sortable li { 
-        height: 2em; 
-        line-height: 1.2em; 
-    }
-    html>body #sortable1 li { 
-        height: 2em; 
-        line-height: 1.2em; 
+    #sortable {
+    display: block;
+    border-width: 6px 0;
+    height: 100%;
+    width:100%;
     }
 
-    .ui-state-highlight { 
-        height: 2em; 
-        line-height: 1.2em; 
+    .item {
+    display: block;
+    float: left;
+    width: 15.85%;
+    box-sizing: border-box; /* keep padding/border inside height/width */
+    margin:0.4%;
+    font-size:20px;
     }
 
     p{
         font-size:20px;
     }
 
-    ul{
-        background-color:lightgrey;
-        padding:10px;
-        border-radius:7px;
+    .style{
+        width:100%;
+        height:auto;
+        margin-left:-5px;
     }
-    </style>
 
+    </style>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    items=["police","3_women","3_men_and_3_women","no_people","3_men"]
 
     $(function() {
         $( '#sortable' ).sortable({
-            connectWith: ".connectedSortable",
-            placeholder: "ui-state-highlight",
+            axis:'x',
             update: function( event, ui ) {
                 idsInOrder = [];
-                $('#sortable li').each(function() {
+                $('#sortable div').each(function() {
                     idsInOrder.push($(this).attr('id'));
                 });
                 $('#order').val(idsInOrder);
             }
         });
-        $( "#sortable" ).disableSelection();
-
-        $( "#sortable1" ).sortable({
-            connectWith: ".connectedSortable",
-            placeholder: "ui-state-highlight",
-            receive: function( event, ui ) {
-                items.push(ui.item.context.id)
-            },
-            remove: function( event, ui ) {
-                items = items.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-            }
-
-        }).disableSelection();
     });
-    function submitAll() {
-        var sum = items.length;
-        if(sum==0){
-            return true;
-        } else{
-            alert("Please drag and drop all the scenarios into the blue area");
-            return false;
-        }
-    }
 
     </script>
 </head>
@@ -114,40 +82,54 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - Exercise 2 of 14</span>
+              <span style="font-size:30px;">Split Consensus - Exercise 4 of 14</span>
             </a>
           </div>
         </div>
       </div>
     </header>
-<div style="margin-left:3%;margin-right:3%;">
+<div style="margin-left:2%;margin-right:2%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>It's 11 pm and you are heading alone to your car, which you parked 3 blocks away. Which of the following scenarios makes you feel more secure? Drag and drop the scenarios from the grey box to the blue box, ordering them from scenarios that make you feel most comfortable to least comfortable</b></p>
+        <p><b>Consider the following industries and byproducts of society. Order them from which you think to be the least harmful to the most harmful for the environment.</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
-        
-        <div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most comfortable</h3>
-            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
-                <ul id="sortable1" class="connectedSortable">
-                <li id="3_women" name="3_women" class="ui-state-default">Finding a group of 3 women</li>
-                <li id="3_men_and_3_women" name="3_men_and_3_women" class="ui-state-default">Finding a group of 3 men and 3 women</li>
-                <li id="no_people" name="no_people" class="ui-state-default">No people at all</li>
-                <li id="police" name="police" class="ui-state-default">Finding a police patrol</li>
-                <li id="3_men" name="3_men" class="ui-state-default">Finding a group of 3 men</li>
-                </ul>
-                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
-                </ul>
-            </div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least comfortable</h3>
 
-            <form id="subForm" action="/activity3/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+        <div>
+            <div class="row">
+                <div id='sortable'>
+                    <div class='item' id="garbage" name="garbage"><img class="style" src="\images\harmful\garbage.png"><br>Garbage</div>
+                    <div class='item' id="oilspill" name="oilspill"><br><br><img class="style" src="\images\harmful\oilspill.png"><br>Oil spills</div>
+                    <div class='item' id="industry" name="industry"><br><img class="style" src="\images\harmful\industry.png"><br>Industry</div>
+                    <div class='item' id="energy_production" name="energy_production"><img class="style" src="\images\harmful\energy.png"><br>Energy Production</div>
+                    <div class='item' id="transportation" name="transportation"><br><br><img class="style" src="\images\harmful\transportation.png"><br>Transportation</div>
+                    <div class='item' id="cattle" name="cattle"><img class="style" src="\images\harmful\cattle.png"><br>Cattle</div>
+                </div>
+            </div>
+
+            <img src="\images\lines\line4.JPG" style="margin-left:-4.5%;width:108%;margin-bottom:30px;height:auto;">
+            <p style="float:left;"><strong>Least harmful</strong>
+            <br>
+            <br>
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            </p> 
+
+
+            <p style="float:right;"><strong>Most harmful</strong>
+            <br>
+            <br>
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            <img src="\images\mark.png" style="width:30px;height:70px;border-radius:0px;">
+            </p>
+            <br><br><br><br><br><br><br>
+
+            <form id="subForm" action="/activity5/{{ userID }}/" method="POST">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">
                 <input type="hidden" id="sec" name="sec" value=""> 
-                <input type="hidden" id="extra" name="extra" value="">
+                <input type="hidden" id="extra" name="extra" value=""> 
             </form>
         </div>
 
@@ -270,7 +252,7 @@ function startTimer(duration, display, captionText,userID) {
 
     }, 1000);
 
-} 
+}  
     var duration = '{{ time }}'
     duration = duration - 1
     var userID = '{{ userID }}';
@@ -291,4 +273,3 @@ function startTimer(duration, display, captionText,userID) {
 
 </script>
 </html>
-

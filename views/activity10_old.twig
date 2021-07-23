@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
-
     #sortable,#sortable1 { 
         list-style-type: none;
         margin: 3%; 
         padding: 15px;
         width: 40%; 
     }
+
     #sortable li,#sortable1 li { 
         margin: 15px;
         padding: 5px; 
@@ -61,7 +61,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    items=["police","3_women","3_men_and_3_women","no_people","3_men"]
+    items=["state","family","friends","spouse","myself","children"]
 
     $(function() {
         $( '#sortable' ).sortable({
@@ -96,7 +96,7 @@
         if(sum==0){
             return true;
         } else{
-            alert("Please drag and drop all the scenarios into the blue area");
+            alert("Please drag and drop all the people into the blue area");
             return false;
         }
     }
@@ -114,7 +114,7 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - Exercise 2 of 14</span>
+              <span style="font-size:30px;">Split Consensus - Exercise 10 of 14</span>
             </a>
           </div>
         </div>
@@ -124,25 +124,26 @@
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>It's 11 pm and you are heading alone to your car, which you parked 3 blocks away. Which of the following scenarios makes you feel more secure? Drag and drop the scenarios from the grey box to the blue box, ordering them from scenarios that make you feel most comfortable to least comfortable</b></p>
+        <p><b>Drag and drop the following people from the grey box to the blue box based on who you think will end up taking care of you once you turn 70, ordering them from most likely to least likely</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
         
         <div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most comfortable</h3>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
             <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
                 <ul id="sortable1" class="connectedSortable">
-                <li id="3_women" name="3_women" class="ui-state-default">Finding a group of 3 women</li>
-                <li id="3_men_and_3_women" name="3_men_and_3_women" class="ui-state-default">Finding a group of 3 men and 3 women</li>
-                <li id="no_people" name="no_people" class="ui-state-default">No people at all</li>
-                <li id="police" name="police" class="ui-state-default">Finding a police patrol</li>
-                <li id="3_men" name="3_men" class="ui-state-default">Finding a group of 3 men</li>
+                <li id="state" name="state" class="ui-state-default">The state</li>
+                <li id="family" name="family" class="ui-state-default">Family</li>
+                <li id="friends" name="friends" class="ui-state-default">Friends</li>
+                <li id="spouse" name="spouse" class="ui-state-default">My spouse</li>
+                <li id="myself" name="myself" class="ui-state-default">Myself</li>
+                <li id="children" name="children" class="ui-state-default">My children</li>
                 </ul>
                 <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
                 </ul>
             </div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least comfortable</h3>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
 
-            <form id="subForm" action="/activity3/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+            <form id="subForm" action="/activity11/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">

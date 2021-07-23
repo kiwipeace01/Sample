@@ -19,87 +19,58 @@
 
     <style>
 
-    #sortable,#sortable1 { 
-        list-style-type: none;
-        margin: 3%; 
-        padding: 15px;
-        width: 40%; 
-    }
-    #sortable li,#sortable1 li { 
-        margin: 15px;
-        padding: 5px; 
-        font-size: 20px; 
-        height: 2em;
-        border-radius:7px;
+    .images{
+        height:100%;
+        width:100%;
     }
 
-    html>body #sortable li { 
-        height: 2em; 
-        line-height: 1.2em; 
-    }
-    html>body #sortable1 li { 
-        height: 2em; 
-        line-height: 1.2em; 
+    #sortable {
+    display: block;
+    border-width: 6px 0;
+    padding: 4px 0;
+    height: 5%;
+    width:100%;
     }
 
-    .ui-state-highlight { 
-        height: 2em; 
-        line-height: 1.2em; 
+    .item {
+    display: block;
+    float: left;
+    width: 11%;
+    height:20%;
+    box-sizing: border-box; /* keep padding/border inside height/width */
+    margin:0.7%;
+    font-size:20px;
     }
+
+    .style{
+        height:450px;
+        margin-bottom:50px;/*Cehck thsi*/
+        width:auto;
+        margin-left:-50px;
+    }
+
 
     p{
         font-size:20px;
     }
 
-    ul{
-        background-color:lightgrey;
-        padding:10px;
-        border-radius:7px;
-    }
     </style>
-
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    items=["police","3_women","3_men_and_3_women","no_people","3_men"]
-
     $(function() {
         $( '#sortable' ).sortable({
-            connectWith: ".connectedSortable",
-            placeholder: "ui-state-highlight",
+            axis:'x',
             update: function( event, ui ) {
                 idsInOrder = [];
-                $('#sortable li').each(function() {
+                $('#sortable div').each(function() {
                     idsInOrder.push($(this).attr('id'));
                 });
                 $('#order').val(idsInOrder);
             }
         });
-        $( "#sortable" ).disableSelection();
-
-        $( "#sortable1" ).sortable({
-            connectWith: ".connectedSortable",
-            placeholder: "ui-state-highlight",
-            receive: function( event, ui ) {
-                items.push(ui.item.context.id)
-            },
-            remove: function( event, ui ) {
-                items = items.filter(function(value, index, arr){ 
-                    return value != ui.item.context.id;
-                });
-            }
-
-        }).disableSelection();
     });
-    function submitAll() {
-        var sum = items.length;
-        if(sum==0){
-            return true;
-        } else{
-            alert("Please drag and drop all the scenarios into the blue area");
-            return false;
-        }
-    }
+
 
     </script>
 </head>
@@ -114,40 +85,55 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - Exercise 2 of 14</span>
+              <span style="font-size:30px;">Split Consensus - 3 of 14</span>
             </a>
           </div>
         </div>
       </div>
     </header>
-<div style="margin-left:3%;margin-right:3%;">
+<div style="margin-left:2%;margin-right:2%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>It's 11 pm and you are heading alone to your car, which you parked 3 blocks away. Which of the following scenarios makes you feel more secure? Drag and drop the scenarios from the grey box to the blue box, ordering them from scenarios that make you feel most comfortable to least comfortable</b></p>
+        <p><b>Please rearrange the following women to sort them based on how much you think they weigh.</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
-        
-        <div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most comfortable</h3>
-            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
-                <ul id="sortable1" class="connectedSortable">
-                <li id="3_women" name="3_women" class="ui-state-default">Finding a group of 3 women</li>
-                <li id="3_men_and_3_women" name="3_men_and_3_women" class="ui-state-default">Finding a group of 3 men and 3 women</li>
-                <li id="no_people" name="no_people" class="ui-state-default">No people at all</li>
-                <li id="police" name="police" class="ui-state-default">Finding a police patrol</li>
-                <li id="3_men" name="3_men" class="ui-state-default">Finding a group of 3 men</li>
-                </ul>
-                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
-                </ul>
-            </div>
-            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least comfortable</h3>
 
-            <form id="subForm" action="/activity3/{{ userID }}/" method="POST" onsubmit="return submitAll()">
+        <div>
+            <div class="row">
+                <div id='sortable'>
+                    <div class='item' id="girl1" name="girl1"><img class="style" src="\images\women\girl11.png"></div>
+                    <div class='item' id="girl2" name="girl2"><img class="style" src="\images\women\girl22.png"></div>
+                    <div class='item' id="girl3" name="girl3"><img class="style" src="\images\women\girl33.png"></div>
+                    <div class='item' id="girl4" name="girl4"><img class="style" src="\images\women\girl44.png"></div>
+                    <div class='item' id="girl5" name="girl5"><img class="style"src="\images\women\girl55.png"></div>
+                    <div class='item' id="girl6" name="girl6"><img class="style" src="\images\women\girl66.png"></div>
+                    <div class='item' id="girl7" name="girl7"><img class="style" src="\images\women\girl77.png"></div>
+                    <div class='item' id="girl8" name="girl8"><img class="style" src="\images\women\girl88.png"></div>
+                </div>
+            </div>
+            <img src="\images\lines\line3.JPG" style="margin-left:-2.5%;width:107%;transform: scaleY(-1);margin-bottom:30px;margin-top:-2%;">
+            <p style="float:left;"><strong style="margin-left:50px;">Least weight</strong>
+            <br>
+            <br>
+            <img class="images" src="\images\minus.jpg" style="width:70px;height:70px;border-radius:100px;">
+            <img class="images" src="\images\weight.png" style="width:100px;height:100px;border-radius:100px;">
+            </p> 
+
+
+            <p style="float:right;"><strong style="margin-right:50px;">Most weight</strong>
+            <br>
+            <br>
+            <img class="images" src="\images\plus.jpg" style="width:70px;height:70px;border-radius:100px;">
+            <img class="images" src="\images\weight.png" style="width:100px;height:100px;border-radius:100px;">
+            </p>
+            <br><br><br><br><br><br><br>
+
+            <form id="subForm" action="/activity4/{{ userID }}/" method="POST">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">
-                <input type="hidden" id="sec" name="sec" value=""> 
                 <input type="hidden" id="extra" name="extra" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
             </form>
         </div>
 
@@ -291,4 +277,3 @@ function startTimer(duration, display, captionText,userID) {
 
 </script>
 </html>
-

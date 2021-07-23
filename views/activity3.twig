@@ -19,58 +19,88 @@
 
     <style>
 
-    .images{
-        height:100%;
-        width:100%;
+    #sortable,#sortable1 { 
+        list-style-type: none;
+        margin: 3%; 
+        padding: 15px;
+        width: 40%; 
     }
 
-    #sortable {
-    display: block;
-    border-width: 6px 0;
-    padding: 4px 0;
-    height: 5%;
-    width:100%;
+    #sortable li,#sortable1 li { 
+        margin: 15px;
+        padding: 5px; 
+        font-size: 20px; 
+        height: 2em;
+        border-radius:7px;
     }
 
-    .item {
-    display: block;
-    float: left;
-    width: 11%;
-    height:20%;
-    box-sizing: border-box; /* keep padding/border inside height/width */
-    margin:0.7%;
-    font-size:20px;
+    html>body #sortable li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+    html>body #sortable1 li { 
+        height: 2em; 
+        line-height: 1.2em; 
     }
 
-    .style{
-        height:450px;
-        margin-bottom:50px;/*Cehck thsi*/
-        width:auto;
-        margin-left:-50px;
+    .ui-state-highlight { 
+        height: 2em; 
+        line-height: 1.2em; 
     }
-
 
     p{
         font-size:20px;
     }
 
+    ul{
+        background-color:lightgrey;
+        padding:10px;
+        border-radius:7px;
+    }
     </style>
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+    items=["good_sexual_life","financial_security","gives_family","attractive_to_me","effective_communicator","same_interests"]
+
     $(function() {
         $( '#sortable' ).sortable({
-            axis:'x',
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
             update: function( event, ui ) {
                 idsInOrder = [];
-                $('#sortable div').each(function() {
+                $('#sortable li').each(function() {
                     idsInOrder.push($(this).attr('id'));
                 });
                 $('#order').val(idsInOrder);
             }
         });
-    });
+        $( "#sortable" ).disableSelection();
 
+        $( "#sortable1" ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            receive: function( event, ui ) {
+                items.push(ui.item.context.id)
+            },
+            remove: function( event, ui ) {
+                items = items.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+            }
+
+        }).disableSelection();
+    });
+    function submitAll() {
+        var sum = items.length;
+        if(sum==0){
+            return true;
+        } else{
+            alert("Please drag and drop all the characteristics into the blue area");
+            return false;
+        }
+    }
 
     </script>
 </head>
@@ -85,54 +115,41 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - 3 of 14</span>
+              <span style="font-size:30px;">Split Consensus - Exercise 3 of 14</span>
             </a>
           </div>
         </div>
       </div>
     </header>
-<div style="margin-left:2%;margin-right:2%;">
+<div style="margin-left:3%;margin-right:3%;">
     <div class="text-center mt-4">
 
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Please rearrange the following women to sort them based on how much you think they weigh.</b></p>
+        <p><b>Drag and drop the following characteristics that you think your spouse should posses from the grey box to the blue box, ordering them from most important to least important</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
-
+        
         <div>
-            <div class="row">
-                <div id='sortable'>
-                    <div class='item' id="girl1" name="girl1"><img class="style" src="\images\women\girl11.png"></div>
-                    <div class='item' id="girl2" name="girl2"><img class="style" src="\images\women\girl22.png"></div>
-                    <div class='item' id="girl3" name="girl3"><img class="style" src="\images\women\girl33.png"></div>
-                    <div class='item' id="girl4" name="girl4"><img class="style" src="\images\women\girl44.png"></div>
-                    <div class='item' id="girl5" name="girl5"><img class="style"src="\images\women\girl55.png"></div>
-                    <div class='item' id="girl6" name="girl6"><img class="style" src="\images\women\girl66.png"></div>
-                    <div class='item' id="girl7" name="girl7"><img class="style" src="\images\women\girl77.png"></div>
-                    <div class='item' id="girl8" name="girl8"><img class="style" src="\images\women\girl88.png"></div>
-                </div>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most important</h3>
+            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
+                <ul id="sortable1" class="connectedSortable">
+                <li id="good_sexual_life" name="good_sexual_life" class="ui-state-default">Commits to a good sexual life</li>
+                <li id="financial_security" name="financial_security" class="ui-state-default">Guarantees financial security</li>
+                <li id="gives_family" name="gives_family" class="ui-state-default">Gives me a family</li>
+                <li id="attractive_to_me" name="attractive_to_me" class="ui-state-default">I find attractive</li>
+                <li id="effective_communicator" name="effective_communicator" class="ui-state-default">Communicates effectively</li>
+                <li id="same_interests" name="same_interests" class="ui-state-default">Has the same interests </li>
+                </ul>
+                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
+                </ul>
             </div>
-            <img src="\images\lines\line3.JPG" style="margin-left:-2.5%;width:107%;transform: scaleY(-1);margin-bottom:30px;margin-top:-2%;">
-            <p style="float:left;"><strong style="margin-left:50px;">Least weight</strong>
-            <br>
-            <br>
-            <img class="images" src="\images\minus.jpg" style="width:70px;height:70px;border-radius:100px;">
-            <img class="images" src="\images\weight.png" style="width:100px;height:100px;border-radius:100px;">
-            </p> 
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least important</h3>
 
-
-            <p style="float:right;"><strong style="margin-right:50px;">Most weight</strong>
-            <br>
-            <br>
-            <img class="images" src="\images\plus.jpg" style="width:70px;height:70px;border-radius:100px;">
-            <img class="images" src="\images\weight.png" style="width:100px;height:100px;border-radius:100px;">
-            </p>
-            <br><br><br><br><br><br><br>
-
-            <form id="subForm" action="/activity4/{{ userID }}/" method="POST">
+            <form id="subForm" action="/activity4/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
                 <input type="hidden" id="order" name="order" value="">
                 <input type="hidden" id="sec" name="sec" value=""> 
+                <input type="hidden" id="extra" name="extra" value="">
             </form>
         </div>
 
@@ -141,6 +158,55 @@
 
 </body>
 <script>
+function startTimer2(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc2, 1000)
+
+
+            function sendFunc2(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+             document.forms.item(0).submit();
+               
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            // if(minutes==1){
+            //     document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            // } else{
+            //     document.getElementById('sec').value = (1)+":"+(60-seconds)
+            // }
+
+            document.getElementById('extra').value = (30-seconds);
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
 function startTimer(duration, display, captionText,userID) {
     var timer = duration, minutes, seconds;
 
@@ -152,19 +218,31 @@ function startTimer(duration, display, captionText,userID) {
 
             clearInterval(timeChange)
 
-            setTimeout(sendFunc, 1000)
+            // setTimeout(sendFunc, 1000)
 
-            document.getElementById("canvas").style.visibility = "hidden";
-            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
-            display.textContent = " 00:00";
+            var check = confirm("Would you like an 30 extra seconds to answer your question?");
+            if(check){
+                startTimer2(30, display, captionText,userID);
+                document.getElementById("submitButton").style.visibility = "visible";
+                document.getElementById("errorText1").innerHTML = "You have an extra 30 seconds to answer the question";
+                document.getElementById("errorText2").innerHTML = "You have an extra 30 seconds to answer the question";
+            }
+            else{
+                setTimeout(sendFunc, 1000);
+                document.getElementById("canvas").style.visibility = "hidden";
+                document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+                display.textContent = " 00:00";
 
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
 
 
             function sendFunc(){
             //    sendData(userID, 0, -1,"-1%",-1)
-               document.forms.item(0).submit()
+                if(!check){
+                    document.forms.item(0).submit();
+                }          
             }
 
             return
@@ -215,3 +293,4 @@ function startTimer(duration, display, captionText,userID) {
 
 </script>
 </html>
+

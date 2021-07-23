@@ -18,248 +18,90 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
-    #custom-handle1,#custom-handle2,#custom-handle3,#custom-handle4,#custom-handle5,#custom-handle6,#custom-handle7 {
-      width: 3em;
-      height: 1.6em;
-      top: 50%;
-      margin-top: -.8em;
-      text-align: center;
-      line-height: 1.6em;
+
+    #sortable,#sortable1 { 
+        list-style-type: none;
+        margin: 3%; 
+        padding: 15px;
+        width: 40%; 
     }
 
-    div.row{
-      padding:40px;
-      height:100px;
-      margin-left:22%;
-      margin-right:22%;
+    #sortable li,#sortable1 li { 
+        margin: 15px;
+        padding: 5px; 
+        font-size: 20px; 
+        height: 2em;
+        border-radius:7px;
     }
-    div.row p{
-      font-size:20px;
+
+    html>body #sortable li { 
+        height: 2em; 
+        line-height: 1.2em; 
     }
+    html>body #sortable1 li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
+    .ui-state-highlight { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
     p{
         font-size:20px;
     }
 
-    td{
-      padding:15px;
+    ul{
+        background-color:lightgrey;
+        padding:10px;
+        border-radius:7px;
     }
     </style>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    $( function() {
-          
-          var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            data: [{
-              type: "pie",
-              startAngle: 240,
-              yValueFormatString: "##0\"%\"",
-              indexLabel: "{label} {y}",
-              dataPoints: [
-                {y: 100, label: "Unassigned population", color:"white"},
-                {y: 0, label: "Bisexual", color:"#FFD6A5"},
-                {y: 0, label: "Heterosexual", color:"#FDFFB6"},
-                {y: 0, label: "Asexual", color:"#CAFFBF"},
-                {y: 0, label: "Trans", color:"#9BF6FF"},
-                {y: 0, label: "Non-binary", color:"#A0C4FF"},
-                {y: 0, label: "Gay", color:"#BDB2FF"},
-                {y: 0, label: "Lesbian", color:"#FFC6FF"},
-              ]
-            }]
-          });
-          chart.render();
+    items=["state","family","friends","spouse","myself","children"]
 
-      var handle1 = $( "#custom-handle1" );
-      $( "#slider1" ).slider({
-        create: function() {
-          handle1.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle1.text( ui.value );
-          $( "#bisexual" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[1].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
+    $(function() {
+        $( '#sortable' ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            update: function( event, ui ) {
+                idsInOrder = [];
+                $('#sortable li').each(function() {
+                    idsInOrder.push($(this).attr('id'));
+                });
+                $('#order').val(idsInOrder);
+            }
+        });
+        $( "#sortable" ).disableSelection();
 
-          chart.render();
-        }
-      });
-      $( "#bisexual" ).val( $( "#slider1" ).slider( "value" ) );
+        $( "#sortable1" ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            receive: function( event, ui ) {
+                items.push(ui.item.context.id)
+            },
+            remove: function( event, ui ) {
+                items = items.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+            }
 
-      var handle2 = $( "#custom-handle2" );
-      $( "#slider2" ).slider({
-        create: function() {
-          handle2.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle2.text( ui.value );
-          $( "#heterosexual" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[2].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
-
-          chart.render();
-        }
-      });
-      $( "#heterosexual" ).val( $( "#slider2" ).slider( "value" ) );
-
-      var handle3 = $( "#custom-handle3" );
-      $( "#slider3" ).slider({
-        create: function() {
-          handle3.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle3.text( ui.value );
-          $( "#asexual" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[3].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
-
-          chart.render();
-        }
-      });
-      $( "#asexual" ).val( $( "#slider3" ).slider( "value" ) );
-
-      var handle4 = $( "#custom-handle4" );
-      $( "#slider4" ).slider({
-        create: function() {
-          handle4.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle4.text( ui.value );
-          $( "#trans" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[4].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
-
-          chart.render();
-        }
-      });
-      $( "#trans" ).val( $( "#slider4" ).slider( "value" ) );
-
-      var handle5 = $( "#custom-handle5" );
-      $( "#slider5" ).slider({
-        create: function() {
-          handle5.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle5.text( ui.value );
-          $( "#non_binary" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[5].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
-
-          chart.render();
-        }
-      });
-      $( "#non_binary" ).val( $( "#slider5" ).slider( "value" ) );
-
-      var handle6 = $( "#custom-handle6" );
-      $( "#slider6" ).slider({
-        create: function() {
-          handle6.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle6.text( ui.value );
-          $( "#gay" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[6].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
-
-          chart.render();
-        }
-      });
-      $( "#gay" ).val( $( "#slider6" ).slider( "value" ) );
-
-      // $('#bisexual').change(function () {
-      //       alert('This works');
-      //   }); 
-
-      var handle7 = $( "#custom-handle7" );
-      $( "#slider7" ).slider({
-        create: function() {
-          handle7.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle7.text( ui.value );
-          $( "#lesbian" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[7].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y);
-
-          chart.render();
-        }
-      });
-      $( "#lesbian" ).val( $( "#slider7" ).slider( "value" ) );
-
-    } );
-
+        }).disableSelection();
+    });
     function submitAll() {
-        var sum = 
-        parseInt(document.getElementById('bisexual').value)+
-        parseInt(document.getElementById('asexual').value)+
-        parseInt(document.getElementById('heterosexual').value)+
-        parseInt(document.getElementById('non_binary').value)+
-        parseInt(document.getElementById('trans').value)+
-        parseInt(document.getElementById('lesbian').value)+
-        parseInt(document.getElementById('gay').value);
-        if(sum==100){           
+        var sum = items.length;
+        if(sum==0){
             return true;
         } else{
-            alert("Error! The sum of percentages is not 100%, please try again");
+            alert("Please drag and drop all the people into the blue area");
             return false;
         }
     }
 
-    function getValue(value){
-      document.getElementById("total").value = parseInt(document.getElementById('bisexual').value)+parseInt(document.getElementById('asexual').value)+
-      parseInt(document.getElementById('heterosexual').value)+parseInt(document.getElementById('non_binary').value)+parseInt(document.getElementById('trans').value)+
-      parseInt(document.getElementById('lesbian').value)+parseInt(document.getElementById('gay').value);
-    }
     </script>
 </head>
 <body>
@@ -279,100 +121,92 @@
         </div>
       </div>
     </header>
-<div style="margin-left:44px;margin-right:44px;">
+<div style="margin-left:3%;margin-right:3%;">
     <div class="text-center mt-4">
+
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Drag the sliders to indicate the % of U.S. population that self-identify into the respective categories show below. (Hover over the terms in italics to see their definitions)</b></p>
+        <p><b>Drag and drop the following people from the grey box to the blue box based on who you think should take care of you once you turn 70, ordering them from most ideal to least ideal</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
-
-        <label for="total">Sum of percentages % = </label>
-        <input style="border:0;font-weight:bold;" type="text" readonly value="0" id="total" name="total">
-
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>     
-
-
+        
         <div>
-        <form id="subForm" action="/activity14/{{ userID }}/" method="POST" onsubmit="return submitAll()">
-          <table>
-            <tr>
-              <td style="background-color:FFD6A5;">
-                <p>
-                  <label for="bisexual">% of population that is <dfn title="Bisexuality is romantic attraction, sexual attraction, or sexual behavior toward both males and females, or to more than one gender.">Bisexual</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="bisexual" name="bisexual" readonly style="border:0; font-weight:bold;background-color:FFD6A5;">
-                </p>
-                <div id="slider1" style="width:80%;">
-                  <div id="custom-handle1" class="ui-slider-handle"></div>
-                </div>
-              </td>
-              <td style="background-color:FDFFB6;">
-                <p>
-                  <label for="heterosexual">% of population that is <dfn title="Heterosexual people are sexually or romantically attracted to people of the opposite sex.">Heterosexual</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="heterosexual" name="heterosexual" readonly style="border:0; font-weight:bold;background-color:FDFFB6;">
-                </p>
-                <div id="slider2" style="width:80%;">
-                  <div id="custom-handle2" class="ui-slider-handle"></div>
-                </div>
-              </td>
-              <td style="background-color:CAFFBF;">
-                <p>
-                  <label for="asexual">% of population that is <dfn title="Asexuality is the lack of sexual attraction to others, or low or absent interest in or desire for sexual activity.">Asexual</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="asexual" name="asexual" readonly style="border:0; font-weight:bold;background-color:CAFFBF;">
-                </p>
-                <div id="slider3" style="width:80%;">
-                  <div id="custom-handle3" class="ui-slider-handle"></div>
-                </div>
-              </td>
-              <td style="background-color:9BF6FF;">
-                <p>
-                  <label for="trans">% of population that is <dfn title="Denoting or relating to a person whose sense of personal identity and gender does not correspond with their birth sex.">Trans</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="trans" name="trans" readonly style="border:0; font-weight:bold;background-color:9BF6FF;">
-                </p>
-                <div id="slider4" style="width:80%;">
-                  <div id="custom-handle4" class="ui-slider-handle"></div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="background-color:A0C4FF;">
-                <p>
-                  <label for="non_binary">% of population that is <dfn title="Non-binary is an umbrella term for gender identities that are neither male nor female‍—‌identities that are outside the gender binary.">Non-binary</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="non_binary" name="non_binary" readonly style="border:0; font-weight:bold;background-color:A0C4FF;">
-                </p>
-                <div id="slider5" style="width:80%;">
-                  <div id="custom-handle5" class="ui-slider-handle"></div>
-                </div>
-              </td>
-              <td style="background-color:BDB2FF;">
-                <p>
-                  <label for="gay">% of population that is <dfn title="Men that are sexually and/or romantically attracted to other men">Gay</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="gay" name="gay" readonly style="border:0; font-weight:bold;background-color:BDB2FF;">
-                </p>
-                <div id="slider6" style="width:80%;">
-                  <div id="custom-handle6" class="ui-slider-handle"></div>
-                </div>
-              </td>
-              <td style="background-color:FFC6FF;">
-                <p>
-                  <label for="lesbian">% of population that is <dfn title="Women that are sexually and/or romantically attracted to other women">Lesbian</dfn>:</label>
-                  <input onchange="getValue()" type="text" id="lesbian" name="lesbian" readonly style="border:0; font-weight:bold;background-color:FFC6FF;">
-                </p>
-                <div id="slider7" style="width:80%;">
-                  <div id="custom-handle7" class="ui-slider-handle"></div>
-                </div>
-              </td>
-            </tr>
-          </table>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most ideal</h3>
+            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
+                <ul id="sortable1" class="connectedSortable">
+                <li id="state" name="state" class="ui-state-default">The state</li>
+                <li id="family" name="family" class="ui-state-default">Family</li>
+                <li id="friends" name="friends" class="ui-state-default">Friends</li>
+                <li id="spouse" name="spouse" class="ui-state-default">My spouse</li>
+                <li id="myself" name="myself" class="ui-state-default">Myself</li>
+                <li id="children" name="children" class="ui-state-default">My children</li>
+                </ul>
+                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
+                </ul>
+            </div>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least ideal</h3>
+
+            <form id="subForm" action="/activity14/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
-                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">  
-                <input type="hidden" id="sec" name="sec" value="">       
-        </form>
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
+                <input type="hidden" id="order" name="order" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
+                <input type="hidden" id="extra" name="extra" value="">
+            </form>
         </div>
+
     </div>
 </div>
 
 </body>
 <script>
+function startTimer2(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc2, 1000)
+
+
+            function sendFunc2(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+             document.forms.item(0).submit();
+               
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            // if(minutes==1){
+            //     document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            // } else{
+            //     document.getElementById('sec').value = (1)+":"+(60-seconds)
+            // }
+
+            document.getElementById('extra').value = (30-seconds);
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
 function startTimer(duration, display, captionText,userID) {
     var timer = duration, minutes, seconds;
 
@@ -384,19 +218,31 @@ function startTimer(duration, display, captionText,userID) {
 
             clearInterval(timeChange)
 
-            setTimeout(sendFunc, 1000)
+            // setTimeout(sendFunc, 1000)
 
-            document.getElementById("canvas").style.visibility = "hidden";
-            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
-            display.textContent = " 00:00";
+            var check = confirm("Would you like an 30 extra seconds to answer your question?");
+            if(check){
+                startTimer2(30, display, captionText,userID);
+                document.getElementById("submitButton").style.visibility = "visible";
+                document.getElementById("errorText1").innerHTML = "You have an extra 30 seconds to answer the question";
+                document.getElementById("errorText2").innerHTML = "You have an extra 30 seconds to answer the question";
+            }
+            else{
+                setTimeout(sendFunc, 1000);
+                document.getElementById("canvas").style.visibility = "hidden";
+                document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+                display.textContent = " 00:00";
 
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
 
 
             function sendFunc(){
             //    sendData(userID, 0, -1,"-1%",-1)
-               document.forms.item(0).submit()
+                if(!check){
+                    document.forms.item(0).submit();
+                }          
             }
 
             return
@@ -408,9 +254,9 @@ function startTimer(duration, display, captionText,userID) {
             seconds = seconds < 10 ? "0" + seconds : seconds;
             display.textContent = minutes + ":" + seconds;
             if(minutes==1){
-                document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+                document.getElementById('sec').value = (1-minutes)+":"+(60-seconds)
             } else{
-                document.getElementById('sec').value = (1)+":"+(60-seconds)
+                document.getElementById('sec').value = (0)+":"+(60-seconds)
             }
             
 

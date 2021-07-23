@@ -15,407 +15,90 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://unpkg.com/d3-simple-slider"></script>
     <script type="text/javascript" src="/javascripts/loadactivity.js"></script>
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
-    #custom-handle1,#custom-handle2,#custom-handle3,#custom-handle4,#custom-handle5,#custom-handle6,#custom-handle7,#custom-handle8,#custom-handle9,#custom-handle10,#custom-handle11 {
-      width: 3em;
-      height: 1.6em;
-      top: 50%;
-      margin-top: -.8em;
-      text-align: center;
-      line-height: 1.6em;
-    }
-    input{
-        background-color:lightblue;
-
+    #sortable,#sortable1 { 
+        list-style-type: none;
+        margin: 3%; 
+        padding: 15px;
+        width: 40%; 
     }
 
-    div.row{
-      padding:40px;
-      height:100px;
-      margin-left:15%;
-      margin-right:15%;
-      background-color:lightblue;
+    #sortable li,#sortable1 li { 
+        margin: 15px;
+        padding: 5px; 
+        font-size: 20px; 
+        height: 2em;
+        border-radius:7px;
     }
-    div.row p{
-      font-size:18px;
+
+    html>body #sortable li { 
+        height: 2em; 
+        line-height: 1.2em; 
     }
+    html>body #sortable1 li { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
+    .ui-state-highlight { 
+        height: 2em; 
+        line-height: 1.2em; 
+    }
+
     p{
-        font-size:18px;
+        font-size:20px;
     }
-    td{
-      padding:15px;
-      background-color:lightblue;
+
+    ul{
+        background-color:lightgrey;
+        padding:10px;
+        border-radius:7px;
     }
     </style>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    old=[0,0,0,0,0,0,0,0,0,0,0];
-    $( function() {
+    items=["state","family","friends","spouse","myself","children"]
 
-          var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            data: [{
-              type: "pie",
-              startAngle: 240,
-              yValueFormatString: "##0\"%\"",
-              indexLabel: "{label} {y}",
-              dataPoints: [
-                {y: 100, label: "Unassigned population", color:"white"},
-                {y: 0, label: "White"},
-                {y: 0, label: "Moroccan"},
-                {y: 0, label: "Lebanese"},
-                {y: 0, label: "European"},
-                {y: 0, label: "Arab"},
-                {y: 0, label: "Asian"},
-                {y: 0, label: "American Indian"},
-                {y: 0, label: "Two or more"},
-                {y: 0, label: "Native Hawaiian or Pacific Islander"},
-                {y: 0, label: "Hispanic"},
-                {y: 0, label: "African American"},
-              ]
-            }]
-          });
-          chart.render();
+    $(function() {
+        $( '#sortable' ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            update: function( event, ui ) {
+                idsInOrder = [];
+                $('#sortable li').each(function() {
+                    idsInOrder.push($(this).attr('id'));
+                });
+                $('#order').val(idsInOrder);
+            }
+        });
+        $( "#sortable" ).disableSelection();
 
-      var handle1 = $( "#custom-handle1" );
-      var slider1 = $( "#slider1" ).slider({
-        create: function() {
-          handle1.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle1.text( ui.value );
-          $( "#white" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[1].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+        $( "#sortable1" ).sortable({
+            connectWith: ".connectedSortable",
+            placeholder: "ui-state-highlight",
+            receive: function( event, ui ) {
+                items.push(ui.item.context.id)
+            },
+            remove: function( event, ui ) {
+                items = items.filter(function(value, index, arr){ 
+                    return value != ui.item.context.id;
+                });
+            }
 
-          chart.render();
-        }
-      });
-      $( "#white" ).val( $( "#slider1" ).slider( "value" ) );
-
-      var handle2 = $( "#custom-handle2" );
-      $( "#slider2" ).slider({
-        create: function() {
-          handle2.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle2.text( ui.value );
-          $( "#moroccan" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[2].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#moroccan" ).val( $( "#slider2" ).slider( "value" ) );
-
-      var handle3 = $( "#custom-handle3" );
-      $( "#slider3" ).slider({
-        create: function() {
-          handle3.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle3.text( ui.value );
-          $( "#lebanese" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[3].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#lebanese" ).val( $( "#slider3" ).slider( "value" ) );
-
-      var handle4 = $( "#custom-handle4" );
-      $( "#slider4" ).slider({
-        create: function() {
-          handle4.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle4.text( ui.value );
-          $( "#european" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[4].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#european" ).val( $( "#slider4" ).slider( "value" ) );
-
-      var handle5 = $( "#custom-handle5" );
-      $( "#slider5" ).slider({
-        create: function() {
-          handle5.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle5.text( ui.value );
-          $( "#arab" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[5].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#arab" ).val( $( "#slider5" ).slider( "value" ) );
-
-      var handle6 = $( "#custom-handle6" );
-      $( "#slider6" ).slider({
-        create: function() {
-          handle6.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle6.text( ui.value );
-          $( "#asian" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[6].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#asian" ).val( $( "#slider6" ).slider( "value" ) );
-
-      var handle7 = $( "#custom-handle7" );
-      $( "#slider7" ).slider({
-        create: function() {
-          handle7.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle7.text( ui.value );
-          $( "#american_indian" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[7].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#american_indian" ).val( $( "#slider7" ).slider( "value" ) );
-
-      var handle8 = $( "#custom-handle8" );
-      $( "#slider8" ).slider({
-        create: function() {
-          handle8.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle8.text( ui.value );
-          $( "#two_or_more" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[8].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#two_or_more" ).val( $( "#slider8" ).slider( "value" ) );
-
-      var handle9 = $( "#custom-handle9" );
-      $( "#slider9" ).slider({
-        create: function() {
-          handle9.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle9.text( ui.value );
-          $( "#islander" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[9].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#islander" ).val( $( "#slider9" ).slider( "value" ) );
-
-      var handle10 = $( "#custom-handle10" );
-      $( "#slider10" ).slider({
-        create: function() {
-          handle10.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle10.text( ui.value );
-          $( "#hispanic" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[10].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#hispanic" ).val( $( "#slider10" ).slider( "value" ) );
-
-      var handle11 = $( "#custom-handle11" );
-      $( "#slider11" ).slider({
-        create: function() {
-          handle11.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle11.text( ui.value );
-          $( "#black" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[11].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#black" ).val( $( "#slider11" ).slider( "value" ) );
-
-    } );
-
+        }).disableSelection();
+    });
     function submitAll() {
-        var sum = 
-        parseInt(document.getElementById('white').value)+
-        parseInt(document.getElementById('moroccan').value)+
-        parseInt(document.getElementById('lebanese').value)+
-        parseInt(document.getElementById('european').value)+
-        parseInt(document.getElementById('arab').value)+
-        parseInt(document.getElementById('asian').value)+
-        parseInt(document.getElementById('american_indian').value)+
-        parseInt(document.getElementById('two_or_more').value)+
-        parseInt(document.getElementById('islander').value)+
-        parseInt(document.getElementById('hispanic').value)+
-        parseInt(document.getElementById('black').value);
-
-        if(sum==100){
+        var sum = items.length;
+        if(sum==0){
             return true;
         } else{
-              alert("Error! The sum of percentages is not 100%, please try again");
+            alert("Please drag and drop all the people into the blue area");
             return false;
         }
-    }
-
-    function getValue(value){
-      document.getElementById("total").value = 
-        parseInt(document.getElementById('white').value)+
-        parseInt(document.getElementById('moroccan').value)+
-        parseInt(document.getElementById('lebanese').value)+
-        parseInt(document.getElementById('european').value)+
-        parseInt(document.getElementById('arab').value)+
-        parseInt(document.getElementById('asian').value)+
-        parseInt(document.getElementById('american_indian').value)+
-        parseInt(document.getElementById('two_or_more').value)+
-        parseInt(document.getElementById('islander').value)+
-        parseInt(document.getElementById('hispanic').value)+
-        parseInt(document.getElementById('black').value);
     }
 
     </script>
@@ -431,144 +114,98 @@
               </svg>
               &nbsp;
               &nbsp;
-              <span style="font-size:30px;">Split Consensus - 14 of 14</span>
+              <span style="font-size:30px;">Split Consensus - Exercise 14 of 14</span>
             </a>
           </div>
         </div>
       </div>
     </header>
-<div style="margin-left:44px;margin-right:44px;">
+<div style="margin-left:3%;margin-right:3%;">
     <div class="text-center mt-4">
+
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Drag the sliders to indicate the % of U.S. population that you think are a specific declared race or origin.
-        </b></p>
+        <p><b>Drag and drop the following people from the grey box to the blue box based on who you think will end up taking care of you once you turn 70, ordering them from most likely to least likely</b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
-
-        <label for="total">Sum of percentages % = </label>
-        <input style="border:0;font-weight:bold;background-color:white;" type="text" readonly value="0" id="total" name="total">
-
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
+        
         <div>
-        <form id="subForm" action="/activity15/{{ userID }}/" method="POST" onsubmit="return submitAll()">
-        <table>
-        <tr>
-        <td>
-              <p>
-                <label for="white">% of population that is White:</label>
-                <input onchange="getValue()" type="text" id="white" name="white" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider1" style="width:80%;">
-                <div id="custom-handle1" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="moroccan">% of population that is Moroccan:</label>
-                <input onchange="getValue()" type="text" id="moroccan" name="moroccan" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider2" style="width:80%;">
-                <div id="custom-handle2" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="lebanese">% of population that is Lebanese:</label>
-                <input onchange="getValue()" type="text" id="lebanese" name="lebanese" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider3" style="width:80%;">
-                <div id="custom-handle3" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="european">% of population that is European:</label>
-                <input onchange="getValue()" type="text" id="european" name="european" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider4" style="width:80%;">
-                <div id="custom-handle4" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        </tr>
-        <tr>
-        <td>
-              <p>
-                <label for="arab">% of population that is Arab:</label>
-                <input onchange="getValue()" type="text" id="arab" name="arab" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider5" style="width:80%;">
-                <div id="custom-handle5" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="asian">% of population that is Asian:</label>
-                <input onchange="getValue()" type="text" id="asian" name="asian" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider6" style="width:80%;">
-                <div id="custom-handle6" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="american_indian">% of population that is American Indian:</label>
-                <input onchange="getValue()" type="text" id="american_indian" name="american_indian" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider7" style="width:80%;">
-                <div id="custom-handle7" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="two_or_more">% of population that is two or more races:</label>
-                <input onchange="getValue()" type="text" id="two_or_more" name="two_or_more" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider8" style="width:80%;">
-                <div id="custom-handle8" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        </tr>
-        <tr>
-        <td>
-              <p>
-                <label for="islander">% of population that is Native Hawaiian and other Pacific Islander:</label>
-                <input onchange="getValue()" type="text" id="islander" name="islander" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider9" style="width:80%;">
-                <div id="custom-handle9" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="hispanic">% of population that is Hispanic:</label>
-                <input onchange="getValue()" type="text" id="hispanic" name="hispanic" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider10" style="width:80%;">
-                <div id="custom-handle10" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="black">% of population that is African American:</label>
-                <input onchange="getValue()" type="text" id="black" name="black" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider11" style="width:80%;">
-                <div id="custom-handle11" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        </tr>
-        </table>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Most likely</h3>
+            <div class="row" style="margin-left:7%;margin-right:-20px;text-align:center;">
+                <ul id="sortable1" class="connectedSortable">
+                <li id="state" name="state" class="ui-state-default">The state</li>
+                <li id="family" name="family" class="ui-state-default">Family</li>
+                <li id="friends" name="friends" class="ui-state-default">Friends</li>
+                <li id="spouse" name="spouse" class="ui-state-default">My spouse</li>
+                <li id="myself" name="myself" class="ui-state-default">Myself</li>
+                <li id="children" name="children" class="ui-state-default">My children</li>
+                </ul>
+                <ul id="sortable" class="connectedSortable" style="background-color:lightblue;">
+                </ul>
+            </div>
+            <h3 style="margin-left:53.25%;text-align:center;background-color:lightblue;border-radius:7px;padding: 5px;width:38%;">Least likely</h3>
+
+            <form id="subForm" action="/activity15/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
-                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">   
-                <input type="hidden" id="sec" name="sec" value="">      
-        </form>
+                <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit">
+                <input type="hidden" id="order" name="order" value="">
+                <input type="hidden" id="sec" name="sec" value=""> 
+                <input type="hidden" id="extra" name="extra" value="">
+            </form>
         </div>
+
     </div>
 </div>
 
 </body>
 <script>
+function startTimer2(duration, display, captionText,userID) {
+    var timer = duration, minutes, seconds;
+
+    var timeChange = setInterval(function () {
+        if (--timer < 0) {
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("errorText1").innerHTML = "Time is out! Changing to next question...";
+            document.getElementById("errorText2").innerHTML = "Time is out! Changing to next question...";
+
+            clearInterval(timeChange)
+
+            setTimeout(sendFunc2, 1000)
+
+
+            function sendFunc2(){
+            //    sendData(userID, 0, -1,"-1%",-1)
+             document.forms.item(0).submit();
+               
+            }
+
+            return
+        } else {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            // if(minutes==1){
+            //     document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+            // } else{
+            //     document.getElementById('sec').value = (1)+":"+(60-seconds)
+            // }
+
+            document.getElementById('extra').value = (30-seconds);
+
+            captionText.innerHTML = "Time remaning: " + timeText;
+            timeText = minutes + ":" + seconds;
+            // alert(timeText)
+
+
+            console.log(sec.value);
+
+            
+        }
+
+    }, 1000);
+
+} 
 function startTimer(duration, display, captionText,userID) {
     var timer = duration, minutes, seconds;
 
@@ -580,19 +217,31 @@ function startTimer(duration, display, captionText,userID) {
 
             clearInterval(timeChange)
 
-            setTimeout(sendFunc, 1000)
+            // setTimeout(sendFunc, 1000)
 
-            document.getElementById("canvas").style.visibility = "hidden";
-            document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
-            display.textContent = " 00:00";
+            var check = confirm("Would you like an 30 extra seconds to answer your question?");
+            if(check){
+                startTimer2(30, display, captionText,userID);
+                document.getElementById("submitButton").style.visibility = "visible";
+                document.getElementById("errorText1").innerHTML = "You have an extra 30 seconds to answer the question";
+                document.getElementById("errorText2").innerHTML = "You have an extra 30 seconds to answer the question";
+            }
+            else{
+                setTimeout(sendFunc, 1000);
+                document.getElementById("canvas").style.visibility = "hidden";
+                document.getElementById("imgText").innerHTML = "Times up! Submit your answer.";
+                display.textContent = " 00:00";
 
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
 
 
             function sendFunc(){
             //    sendData(userID, 0, -1,"-1%",-1)
-               document.forms.item(0).submit()
+                if(!check){
+                    document.forms.item(0).submit();
+                }          
             }
 
             return
@@ -604,9 +253,9 @@ function startTimer(duration, display, captionText,userID) {
             seconds = seconds < 10 ? "0" + seconds : seconds;
             display.textContent = minutes + ":" + seconds;
             if(minutes==1){
-                document.getElementById('sec').value = (1-minutes)+":"+(30-seconds)
+                document.getElementById('sec').value = (1-minutes)+":"+(60-seconds)
             } else{
-                document.getElementById('sec').value = (1)+":"+(60-seconds)
+                document.getElementById('sec').value = (0)+":"+(60-seconds)
             }
             
 
