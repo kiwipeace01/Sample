@@ -560,7 +560,7 @@ router.post('/activity7/:userID/', function (req, res, next) {
 
         if(nameArr.length==1){
             console.log("Initialising default");
-            nameArr=["government","industry","business_people","civilians","scientists","misinformation"];
+            nameArr=["government","industry","engineers","civilians","scientists","misinformation"];
         }
 
         var item = {
