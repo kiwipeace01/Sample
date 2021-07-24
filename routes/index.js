@@ -473,7 +473,7 @@ router.post('/activity12/:userID/', function (req, res, next) {
             time_taken="0:60";
         }else{
             time_taken=req.body.sec;
-        }
+        }///hi
 
         if(nameArr.length==1){
             console.log("Initialising default");
