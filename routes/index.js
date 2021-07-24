@@ -173,7 +173,7 @@ router.post('/activity9/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 8,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -263,7 +263,7 @@ router.post('/activity5/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 4,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -345,7 +345,7 @@ router.post('/activity2/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 1,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -428,7 +428,7 @@ router.post('/activity13/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 12,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -512,7 +512,7 @@ router.post('/activity12/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 11,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -595,7 +595,7 @@ router.post('/activity7/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 6,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -603,7 +603,7 @@ router.post('/activity7/:userID/', function (req, res, next) {
             if (currentUser.question < 15) {
                 
                 res.render('activity7', {
-                    time: 60,
+                    time: 90,
                     userID: currentUser.id,
                     question: 7,
                     sequence: currentUser.question
@@ -673,7 +673,7 @@ router.post('/activity11/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 10,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -751,7 +751,7 @@ router.post('/activity3/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 2,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -829,7 +829,7 @@ router.post('/activity14/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 13,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -907,7 +907,7 @@ router.post('/activity15/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 14,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -982,7 +982,7 @@ router.post('/activity4/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 3,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -1060,7 +1060,7 @@ router.post('/activity6/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 5,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -1141,7 +1141,7 @@ router.post('/activity10/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 9,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {
@@ -1226,7 +1226,7 @@ router.post('/activity8/:userID/', function (req, res, next) {
                 userID: currentUser.id,
                 question: 7,
                 sequence: currentUser.question,
-                error: "ERROR: Please answer all questions!"
+                error: "There was an error while submitting your answer, please try again"
             })
 
         } else {   
