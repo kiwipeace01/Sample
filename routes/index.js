@@ -477,7 +477,7 @@ router.post('/activity12/:userID/', function (req, res, next) {
 
         if(nameArr.length==1){
             console.log("Initialising default");
-            nameArr=["recycling","noCar_culture","local_consumption","civilian_demands","industry_regulations","alternative_energies","picking_up_garbage","reforestation"];
+            nameArr=["recycling","noCar_culture","local_consumption","popular_movements","industry_regulations","alternative_energies","picking_up_garbage","reforestation"];
         }
 
         var item = {
@@ -560,7 +560,7 @@ router.post('/activity7/:userID/', function (req, res, next) {
 
         if(nameArr.length==1){
             console.log("Initialising default");
-            nameArr=["government","industry","engineers","civilians","scientists","misinformation"];
+            nameArr=["government","engineers","corporations","civilians","scientists","misinformation"];
         }
 
         var item = {
