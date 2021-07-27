@@ -1,0 +1,3 @@
+[submodule "Sample"]
+	path = Sample
+	url = https://github.com/kiwipeace01/Sample
