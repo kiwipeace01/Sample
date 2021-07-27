@@ -7,8 +7,9 @@ const User = require('../User');
 const { response } = require('express');
 
 // TODO: Remove hardcoded link
-var url = 'mongodb://localhost:27014/';
+// var url = 'mongodb://localhost:27014/';
 // var url = 'mongodb://localhost:27017/';
+var url="mongodb+srv://user1:mcZZSFTM_2Q_32T@cluster0.r08ei.mongodb.net/admin?retryWrites=true&w=majority";
 
 
 
