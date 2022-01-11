@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
-    #custom-handle1,#custom-handle2,#custom-handle3,#custom-handle4,#custom-handle5,#custom-handle6,#custom-handle7,#custom-handle8,#custom-handle9,#custom-handle10,#custom-handle11 {
+    #custom-handle1,#custom-handle2,#custom-handle3,#custom-handle4,#custom-handle5,#custom-handle6,#custom-handle7,#custom-handle8 {
       width: 3em;
       height: 1.6em;
       top: 50%;
@@ -54,7 +54,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    old=[0,0,0,0,0,0,0,0,0,0,0];
+    old=[0,0,0,0,0,0,0,0];
     $( function() {
 
           var chart = new CanvasJS.Chart("chartContainer", {
@@ -66,17 +66,14 @@
               indexLabel: "{label} {y}",
               dataPoints: [
                 {y: 100, label: "Unassigned population", color:"white"},
-                {y: 0, label: "White"},
-                {y: 0, label: "Moroccan"},
-                {y: 0, label: "Lebanese"},
-                {y: 0, label: "European"},
-                {y: 0, label: "Arab"},
-                {y: 0, label: "Asian"},
-                {y: 0, label: "American Indian"},
-                {y: 0, label: "Two or more"},
-                {y: 0, label: "Native Hawaiian or Pacific Islander"},
-                {y: 0, label: "Hispanic"},
-                {y: 0, label: "African American"},
+                {y: 0, label: "Hindu"},
+                {y: 0, label: "Muslim"},
+                {y: 0, label: "Christian"},
+                {y: 0, label: "Sikh"},
+                {y: 0, label: "Buddhist"},
+                {y: 0, label: "Jain"},
+                {y: 0, label: "Others"},
+                {y: 0, label: "None"},
               ]
             }]
           });
@@ -89,7 +86,7 @@
         },
         slide: function( event, ui ) {
           handle1.text( ui.value );
-          $( "#white" ).val( ui.value ).change();
+          $( "#hindu" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[1].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -99,15 +96,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#white" ).val( $( "#slider1" ).slider( "value" ) );
+      $( "#hindu" ).val( $( "#slider1" ).slider( "value" ) );
 
       var handle2 = $( "#custom-handle2" );
       $( "#slider2" ).slider({
@@ -116,7 +110,7 @@
         },
         slide: function( event, ui ) {
           handle2.text( ui.value );
-          $( "#moroccan" ).val( ui.value ).change();
+          $( "#muslim" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[2].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -126,15 +120,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#moroccan" ).val( $( "#slider2" ).slider( "value" ) );
+      $( "#muslim" ).val( $( "#slider2" ).slider( "value" ) );
 
       var handle3 = $( "#custom-handle3" );
       $( "#slider3" ).slider({
@@ -143,7 +134,7 @@
         },
         slide: function( event, ui ) {
           handle3.text( ui.value );
-          $( "#lebanese" ).val( ui.value ).change();
+          $( "#christian" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[3].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -153,15 +144,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#lebanese" ).val( $( "#slider3" ).slider( "value" ) );
+      $( "#christian" ).val( $( "#slider3" ).slider( "value" ) );
 
       var handle4 = $( "#custom-handle4" );
       $( "#slider4" ).slider({
@@ -170,7 +158,7 @@
         },
         slide: function( event, ui ) {
           handle4.text( ui.value );
-          $( "#european" ).val( ui.value ).change();
+          $( "#sikh" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[4].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -180,15 +168,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#european" ).val( $( "#slider4" ).slider( "value" ) );
+      $( "#sikh" ).val( $( "#slider4" ).slider( "value" ) );
 
       var handle5 = $( "#custom-handle5" );
       $( "#slider5" ).slider({
@@ -197,7 +182,7 @@
         },
         slide: function( event, ui ) {
           handle5.text( ui.value );
-          $( "#arab" ).val( ui.value ).change();
+          $( "#buddhist" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[5].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -207,15 +192,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#arab" ).val( $( "#slider5" ).slider( "value" ) );
+      $( "#buddhist" ).val( $( "#slider5" ).slider( "value" ) );
 
       var handle6 = $( "#custom-handle6" );
       $( "#slider6" ).slider({
@@ -224,7 +206,7 @@
         },
         slide: function( event, ui ) {
           handle6.text( ui.value );
-          $( "#asian" ).val( ui.value ).change();
+          $( "#jain" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[6].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -234,15 +216,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#asian" ).val( $( "#slider6" ).slider( "value" ) );
+      $( "#jain" ).val( $( "#slider6" ).slider( "value" ) );
 
       var handle7 = $( "#custom-handle7" );
       $( "#slider7" ).slider({
@@ -251,7 +230,7 @@
         },
         slide: function( event, ui ) {
           handle7.text( ui.value );
-          $( "#american_indian" ).val( ui.value ).change();
+          $( "#others" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[7].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -261,15 +240,12 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#american_indian" ).val( $( "#slider7" ).slider( "value" ) );
+      $( "#others" ).val( $( "#slider7" ).slider( "value" ) );
 
       var handle8 = $( "#custom-handle8" );
       $( "#slider8" ).slider({
@@ -278,7 +254,7 @@
         },
         slide: function( event, ui ) {
           handle8.text( ui.value );
-          $( "#two_or_more" ).val( ui.value ).change();
+          $( "#none" ).val( ui.value ).change();
           chart.options.data[0].dataPoints[8].y = ui.value;
           chart.options.data[0].dataPoints[0].y = 100-(
           chart.options.data[0].dataPoints[1].y+
@@ -288,112 +264,25 @@
           chart.options.data[0].dataPoints[5].y+
           chart.options.data[0].dataPoints[6].y+
           chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
+          chart.options.data[0].dataPoints[8].y);
 
           chart.render();
         }
       });
-      $( "#two_or_more" ).val( $( "#slider8" ).slider( "value" ) );
-
-      var handle9 = $( "#custom-handle9" );
-      $( "#slider9" ).slider({
-        create: function() {
-          handle9.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle9.text( ui.value );
-          $( "#islander" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[9].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#islander" ).val( $( "#slider9" ).slider( "value" ) );
-
-      var handle10 = $( "#custom-handle10" );
-      $( "#slider10" ).slider({
-        create: function() {
-          handle10.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle10.text( ui.value );
-          $( "#hispanic" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[10].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#hispanic" ).val( $( "#slider10" ).slider( "value" ) );
-
-      var handle11 = $( "#custom-handle11" );
-      $( "#slider11" ).slider({
-        create: function() {
-          handle11.text( $( this ).slider( "value" ) );
-        },
-        slide: function( event, ui ) {
-          handle11.text( ui.value );
-          $( "#black" ).val( ui.value ).change();
-          chart.options.data[0].dataPoints[11].y = ui.value;
-          chart.options.data[0].dataPoints[0].y = 100-(
-          chart.options.data[0].dataPoints[1].y+
-          chart.options.data[0].dataPoints[2].y+
-          chart.options.data[0].dataPoints[3].y+
-          chart.options.data[0].dataPoints[4].y+
-          chart.options.data[0].dataPoints[5].y+
-          chart.options.data[0].dataPoints[6].y+
-          chart.options.data[0].dataPoints[7].y+
-          chart.options.data[0].dataPoints[8].y+
-          chart.options.data[0].dataPoints[9].y+
-          chart.options.data[0].dataPoints[10].y+
-          chart.options.data[0].dataPoints[11].y);
-
-          chart.render();
-        }
-      });
-      $( "#black" ).val( $( "#slider11" ).slider( "value" ) );
+      $( "#none" ).val( $( "#slider8" ).slider( "value" ) );
 
     } );
 
     function submitAll() {
         var sum = 
-        parseInt(document.getElementById('white').value)+
-        parseInt(document.getElementById('moroccan').value)+
-        parseInt(document.getElementById('lebanese').value)+
-        parseInt(document.getElementById('european').value)+
-        parseInt(document.getElementById('arab').value)+
-        parseInt(document.getElementById('asian').value)+
-        parseInt(document.getElementById('american_indian').value)+
-        parseInt(document.getElementById('two_or_more').value)+
-        parseInt(document.getElementById('islander').value)+
-        parseInt(document.getElementById('hispanic').value)+
-        parseInt(document.getElementById('black').value);
+        parseInt(document.getElementById('hindu').value)+
+        parseInt(document.getElementById('muslim').value)+
+        parseInt(document.getElementById('christian').value)+
+        parseInt(document.getElementById('sikh').value)+
+        parseInt(document.getElementById('buddhist').value)+
+        parseInt(document.getElementById('jain').value)+
+        parseInt(document.getElementById('others').value)+
+        parseInt(document.getElementById('none').value);
 
         if(sum==100){
             return true;
@@ -405,17 +294,14 @@
 
     function getValue(value){
       document.getElementById("total").value = 
-        parseInt(document.getElementById('white').value)+
-        parseInt(document.getElementById('moroccan').value)+
-        parseInt(document.getElementById('lebanese').value)+
-        parseInt(document.getElementById('european').value)+
-        parseInt(document.getElementById('arab').value)+
-        parseInt(document.getElementById('asian').value)+
-        parseInt(document.getElementById('american_indian').value)+
-        parseInt(document.getElementById('two_or_more').value)+
-        parseInt(document.getElementById('islander').value)+
-        parseInt(document.getElementById('hispanic').value)+
-        parseInt(document.getElementById('black').value);
+        parseInt(document.getElementById('hindu').value)+
+        parseInt(document.getElementById('muslim').value)+
+        parseInt(document.getElementById('christian').value)+
+        parseInt(document.getElementById('sikh').value)+
+        parseInt(document.getElementById('buddhist').value)+
+        parseInt(document.getElementById('jain').value)+
+        parseInt(document.getElementById('others').value)+
+        parseInt(document.getElementById('none').value);
     }
 
     </script>
@@ -440,7 +326,7 @@
 <div style="margin-left:44px;margin-right:44px;">
     <div class="text-center mt-4">
         <p class="py-2 text-danger" id="errorText1"> {{ error }} </p>
-        <p><b>Drag the sliders to indicate the % of U.S. population that you think are a specific declared race or origin.
+        <p><b>Drag the sliders to indicate the % of the population of India that you think are a specific declared religion.
         </b></p>
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
 
@@ -456,8 +342,8 @@
         <tr>
         <td>
               <p>
-                <label for="white">% of population that is White:</label>
-                <input onchange="getValue()" type="text" id="white" name="white" readonly style="border:0; font-weight:bold;">
+                <label for="hindu">% of population that is Hindu:</label>
+                <input onchange="getValue()" type="text" id="hindu" name="hindu" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider1" style="width:80%;">
                 <div id="custom-handle1" class="ui-slider-handle"></div>
@@ -465,8 +351,8 @@
         </td>
         <td>
               <p>
-                <label for="moroccan">% of population that is Moroccan:</label>
-                <input onchange="getValue()" type="text" id="moroccan" name="moroccan" readonly style="border:0; font-weight:bold;">
+                <label for="muslim">% of population that is Muslim:</label>
+                <input onchange="getValue()" type="text" id="muslim" name="muslim" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider2" style="width:80%;">
                 <div id="custom-handle2" class="ui-slider-handle"></div>
@@ -474,8 +360,8 @@
         </td>
         <td>
               <p>
-                <label for="lebanese">% of population that is Lebanese:</label>
-                <input onchange="getValue()" type="text" id="lebanese" name="lebanese" readonly style="border:0; font-weight:bold;">
+                <label for="christian">% of population that is Christian:</label>
+                <input onchange="getValue()" type="text" id="christian" name="christian" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider3" style="width:80%;">
                 <div id="custom-handle3" class="ui-slider-handle"></div>
@@ -483,8 +369,8 @@
         </td>
         <td>
               <p>
-                <label for="european">% of population that is European:</label>
-                <input onchange="getValue()" type="text" id="european" name="european" readonly style="border:0; font-weight:bold;">
+                <label for="sikh">% of population that is Sikh:</label>
+                <input onchange="getValue()" type="text" id="sikh" name="sikh" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider4" style="width:80%;">
                 <div id="custom-handle4" class="ui-slider-handle"></div>
@@ -494,8 +380,8 @@
         <tr>
         <td>
               <p>
-                <label for="arab">% of population that is Arab:</label>
-                <input onchange="getValue()" type="text" id="arab" name="arab" readonly style="border:0; font-weight:bold;">
+                <label for="buddhist">% of population that is Buddhist:</label>
+                <input onchange="getValue()" type="text" id="buddhist" name="buddhist" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider5" style="width:80%;">
                 <div id="custom-handle5" class="ui-slider-handle"></div>
@@ -503,8 +389,8 @@
         </td>
         <td>
               <p>
-                <label for="asian">% of population that is Asian:</label>
-                <input onchange="getValue()" type="text" id="asian" name="asian" readonly style="border:0; font-weight:bold;">
+                <label for="jain">% of population that is Jain:</label>
+                <input onchange="getValue()" type="text" id="jain" name="jain" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider6" style="width:80%;">
                 <div id="custom-handle6" class="ui-slider-handle"></div>
@@ -512,8 +398,8 @@
         </td>
         <td>
               <p>
-                <label for="american_indian">% of population that is American Indian:</label>
-                <input onchange="getValue()" type="text" id="american_indian" name="american_indian" readonly style="border:0; font-weight:bold;">
+                <label for="others">% of population that is some other religion:</label>
+                <input onchange="getValue()" type="text" id="others" name="others" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider7" style="width:80%;">
                 <div id="custom-handle7" class="ui-slider-handle"></div>
@@ -521,8 +407,8 @@
         </td>
         <td>
               <p>
-                <label for="two_or_more">% of population that is two or more races:</label>
-                <input onchange="getValue()" type="text" id="two_or_more" name="two_or_more" readonly style="border:0; font-weight:bold;">
+                <label for="none">% of population that is not religious:</label>
+                <input onchange="getValue()" type="text" id="none" name="none" readonly style="border:0; font-weight:bold;">
               </p>
               <div id="slider8" style="width:80%;">
                 <div id="custom-handle8" class="ui-slider-handle"></div>
@@ -530,33 +416,6 @@
         </td>
         </tr>
         <tr>
-        <td>
-              <p>
-                <label for="islander">% of population that is Native Hawaiian and other Pacific Islander:</label>
-                <input onchange="getValue()" type="text" id="islander" name="islander" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider9" style="width:80%;">
-                <div id="custom-handle9" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="hispanic">% of population that is Hispanic:</label>
-                <input onchange="getValue()" type="text" id="hispanic" name="hispanic" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider10" style="width:80%;">
-                <div id="custom-handle10" class="ui-slider-handle"></div>
-              </div>
-        </td>
-        <td>
-              <p>
-                <label for="black">% of population that is Black or African American:</label>
-                <input onchange="getValue()" type="text" id="black" name="black" readonly style="border:0; font-weight:bold;">
-              </p>
-              <div id="slider11" style="width:80%;">
-                <div id="custom-handle11" class="ui-slider-handle"></div>
-              </div>
-        </td>
         </tr>
         </table>
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>

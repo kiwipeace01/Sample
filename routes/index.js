@@ -9,7 +9,7 @@ const { response } = require('express');
 // TODO: Remove hardcoded link
 // var url = 'mongodb://localhost:27014/';
 // var url = 'mongodb://localhost:27017/';
-var url="mongodb+srv://user1:mcZZSFTM_2Q_32T@cluster0.r08ei.mongodb.net/admin?retryWrites=true&w=majority";
+var url="mongodb+srv://user1:mcZZSFTM_2Q_32T@cluster0.r08ei.mongodb.net/test";
 
 
 
@@ -1190,17 +1190,14 @@ router.post('/activity8/:userID/', function (req, res, next) {
             "question": 7,
             "time_taken":time_taken,
             "extra_time_taken":req.body.extra,
-            '%white': req.body.white,
-            '%moroccan':req.body.moroccan,
-            '%lebanese':req.body.lebanese,
-            '%european':req.body.european,
-            '%arab':req.body.arab,
-            '%asian':req.body.asian,
-            '%american_indian':req.body.american_indian,
-            '%two_or_more_races':req.body.two_or_more,
-            '%pacific_islander':req.body.islander,
-            '%hispanic':req.body.hispanic,
-            '%black':req.body.black,
+            '%hindu': req.body.hindu,
+            '%muslim':req.body.muslim,
+            '%christian':req.body.christian,
+            '%sikh':req.body.sikh,
+            '%buddhist':req.body.buddhist,
+            '%jain':req.body.jain,
+            '%others':req.body.others,
+            '%none':req.body.none,
         };
 
         console.log(item);
@@ -1254,12 +1251,12 @@ router.post('/end/:userID', function (req, res, next) {
 
     //storesurvey results
     if(req.body.no==null){
-        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,req.body.political_spectrum,req.body.topic,req.body.feedback]
+        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,req.body.political_spectrum,req.body.topic,req.body.extra_info,req.body.feedback]
     } else{
-        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,"undisclosed",req.body.topic,req.body.feedback]
+        var arr = [req.body.year_of_birth,req.body.place_of_birth,req.body.place_of_residence,req.body.gender,"undisclosed",req.body.topic,req.body.extra_info,req.body.feedback]
     }
 
-    var all = ["lgbtq_community","race","workforce","body_weight","climate_change","future","getting_older","security","relationships"];
+    var all = ["lgbtq_community","religion","workforce","body_weight","climate_change","future","getting_older","security","relationships"];
     var topics = arr[5];
     var political = arr[4];
 
@@ -1287,7 +1284,8 @@ router.post('/end/:userID', function (req, res, next) {
         'gender':arr[3],
         'political_identification':political,
         'uncomfortable_topics':topics,
-        'feedback':arr[6]
+        'extra_information':arr[6],
+        'feedback':arr[7]
     }
     
     co(function* () {

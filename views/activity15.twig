@@ -146,15 +146,15 @@
 
           <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
             <label style="font-size:20px;" for="country_birth">Select your country of birth</label>
-            <select style="border-radius:20px;" id="country_birth" name="country_birth" class="bfh-countries form-control" data-country="US" data-flags="true" required></select>
+            <select style="border-radius:20px;" id="country_birth" name="country_birth" class="bfh-countries form-control" data-country="IN" data-flags="true" required></select>
             <br><br>
             <label style="font-size:20px;" for="state_birth">Select your state of birth</label>
             <select style="border-radius:20px;" id="state_birth" name="state_birth" class="bfh-states form-control" data-country="country_birth" required></select>
           </div> 
 
           <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
-            <label style="font-size:20px;" for="state_residence">Select your state of residence in the U.S.</label>
-            <select style="border-radius:20px;" id="state_residence" name="state_residence" class="bfh-states form-control" data-country="US" required></select>
+            <label style="font-size:20px;" for="state_residence">Select your state of residence in India</label>
+            <select style="border-radius:20px;" id="state_residence" name="state_residence" class="bfh-states form-control" data-country="IN" required></select>
           </div>  
 
           <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
@@ -191,16 +191,17 @@
           </div> 
 
           <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
-            <label style="font-size:20px;" for="slider" style="margin-right:50px;">I identify on the following position of the political spectrum </label>
+            <label style="font-size:20px;" for="slider" style="margin-right:50px;">I identify on the following position of the political spectrum.</label>
             <br>
             <br>
             <div style="margin-bottom:40px;">
               <div id="slider" style="width:60%;margin-left:16%;">
-                <img src="\images\lines\labels.png" style="width:119%;margin-bottom:200px;height:auto;margin-top:15px;margin-left:-10%;">
+                <img src="\images\lines\labels2.png" style="width:119%;margin-bottom:200px;height:auto;margin-top:15px;margin-left:-10%;">
               </div>
               <input id="political_spectrum" name="political_spectrum" type="hidden" value="">
             </div>
               <label style="font-size:20px;margin-top:50px;" for="no"><input class="check" type="checkbox" name="no" id="no"> I'd rather not state my political identification</label>
+          <label style="color:red;">(Please use the following wikipedia links to find out more about <a target="_blank" href="https://en.wikipedia.org/wiki/List_of_left-wing_political_parties">left-wing</a> parties and <a target="_blank" href="https://en.wikipedia.org/wiki/List_of_right-wing_political_parties">right-wing</a> parties in India if required)</label>
           </div>  
 
           <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;">
@@ -209,7 +210,7 @@
                 <br>
                 <div style="text-align:left;margin-left:20px;font-size:20px;">
                 <label style="display: block;" for="topic1"><input style="vertical-align: bottom;position: relative;" type="checkbox" id="topic1" name="topic" value="lgbtq_community"> The LGBTQ+ Community</label>
-                <label style="display: block;" for="topic2"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic2" name="topic" value="race"> Race</label>
+                <label style="display: block;" for="topic2"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic2" name="topic" value="religion"> Religion</label>
                 <label style="display: block;" for="topic3"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic3" name="topic" value="workforce"> The Workforce</label>
                 <label style="display: block;" for="topic4"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic4" name="topic" value="body_weight"> Body-weight</label>
                 <label style="display: block;" for="topic5"><input style="vertical-align: middle;position: relative;" type="checkbox" id="topic5" name="topic" value="climate_change"> Climate change</label>
@@ -224,7 +225,15 @@
                 </div>
           </div>
           <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;font-size:20px;">
-            <div style="display:block;"><label for="feedback">You may leave any additional feedback for the research team regarding this survey or project here</label>
+            <div style="display:block;"><label for="extra_info">Please mention any other additional information that you would like to provide about yourself here</label>
+            </div>
+            <br>
+            <div class="form-group">
+            <textarea class="form-control" style="border-radius:20px;" id="exampleFormControlTextarea1" id="extra_info" name="extra_info" rows="3" cols="150"></textarea>
+            </div>
+          </div>
+          <div class="form-group row" style="border:solid lightblue;border-radius:20px;padding:20px;font-size:20px;">
+            <div style="display:block;"><label for="feedback">You may also leave any additional feedback for the research team regarding this survey or project here</label>
             </div>
             <br>
             <div class="form-group">
