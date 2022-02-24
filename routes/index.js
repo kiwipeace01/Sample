@@ -27,7 +27,7 @@ const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 //
 //Get home page
-//
+//6,8, 12
 
 
 router.get('/', function (req, res, next) {
@@ -135,16 +135,16 @@ router.post('/activity9/:userID/', function (req, res, next) {
             "question": 8,
             "time_taken":time_taken,
             "extra_time_taken":req.body.extra,
-            '35k': req.body.thirtyFiveThousand.split(','),
-            '30-35k': req.body.thirtyThousand.split(','),
-            '25-30k': req.body.twentyFiveThousand.split(','),
-            '20-25k': req.body.twentyThousand.split(','),
-            '15-20k': req.body.fifteenThousand.split(','),
-            '10-15k': req.body.tenThousand.split(','),
-            '7_5-10k': req.body.sevenThousandFiveHundred.split(','),
-            '5-7_5k': req.body.fiveThousand.split(','),
-            '3-5k': req.body.threeThousand.split(','),
-            '1-3k': req.body.oneThousand.split(','),
+            '1M+': req.body.first.split(','),
+            '600k-1M': req.body.second.split(','),
+            '300-600k': req.body.third.split(','),
+            '100-300k': req.body.fourth.split(','),
+            '80-100k': req.body.fifth.split(','),
+            '50-80k': req.body.sixth.split(','),
+            '20-50k': req.body.seventh.split(','),
+            '5-20k': req.body.eighth.split(','),
+            '1-5k': req.body.ninth.split(','),
+            '1k>': req.body.tenth.split(','),
         };
 
         console.log(item)
@@ -229,7 +229,7 @@ router.post('/activity5/:userID/', function (req, res, next) {
 
         if(nameArr.length==1){
             console.log("Initialising default");
-            nameArr=["doctor","makeup_artist","software_developer","dentist","priest","teacher"];
+            nameArr=["doctor","makeup_artist","software_developer","dentist","religious_leader","teacher"];
         }
 
         var item = {
@@ -394,7 +394,7 @@ router.post('/activity13/:userID/', function (req, res, next) {
 
         if(nameArr.length==1){
             console.log("Initialising default");
-            nameArr=["garbage","oilspill","industry","energy_production","transportation","cattle"];
+            nameArr=["garbage","oilspill","industry","energy_production","transportation","meat_industry"];
         }
 
         var item = {

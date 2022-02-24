@@ -82,13 +82,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 first.push(ui.item.context.id)
-                $("#first").val(first)
+                $("#more_than_1M").val(first)
             },
             remove: function( event, ui ) {
                 first = first.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#first").val(first)
+                $("#more_than_1M").val(first)
             }
 
         }).disableSelection();
@@ -97,13 +97,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 second.push(ui.item.context.id)
-                $("#30-35k").val(second)
+                $("#600k-1M").val(second)
             },
             remove: function( event, ui ) {
                 second = second.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#30-35k").val(second)
+                $("#600k-1M").val(second)
             }
 
         }).disableSelection();
@@ -112,13 +112,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 third.push(ui.item.context.id)
-                $("#25-30k").val(third)
+                $("#300-600k").val(third)
             },
             remove: function( event, ui ) {
                 third = third.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#25-30k").val(third)
+                $("#300-600k").val(third)
             }
 
         }).disableSelection();
@@ -127,13 +127,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 fourth.push(ui.item.context.id)
-                $("#20-25k").val(fourth)
+                $("#100-300k").val(fourth)
             },
             remove: function( event, ui ) {
                 fourth = fourth.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#20-25k").val(fourth)
+                $("#100-300k").val(fourth)
             }
 
         }).disableSelection();
@@ -142,13 +142,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 fifth.push(ui.item.context.id)
-                $("#15-20k").val(fifth)
+                $("#80-100k").val(fifth)
             },
             remove: function( event, ui ) {
                 fifth = fifth.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#15-20k").val(fifth)
+                $("#80-100k").val(fifth)
             }
 
         }).disableSelection();
@@ -157,13 +157,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 sixth.push(ui.item.context.id)
-                $("#10-15k").val(sixth)
+                $("#50-80k").val(sixth)
             },
             remove: function( event, ui ) {
                 sixth = sixth.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#10-15k").val(sixth)
+                $("#50-80k").val(sixth)
             }
 
         }).disableSelection();
@@ -172,13 +172,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 seventh.push(ui.item.context.id)
-                $("#7_5-10k").val(seventh)
+                $("#20-50k").val(seventh)
             },
             remove: function( event, ui ) {
                 seventh = seventh.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#7_5-10k").val(seventh)
+                $("#20-50k").val(seventh)
             }
 
         }).disableSelection();
@@ -187,14 +187,14 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 eighth.push(ui.item.context.id)
-                $("#5-7_5k").val(eighth)
+                $("#5-20k").val(eighth)
                 
             },
             remove: function( event, ui ) {
                 eighth = eighth.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#5-7_5k").val(eighth)
+                $("#5-20k").val(eighth)
                 
             }
 
@@ -204,13 +204,13 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 ninth.push(ui.item.context.id)
-                $("#3-5k").val(ninth)
+                $("#1-5k").val(ninth)
             },
             remove: function( event, ui ) {
                 ninth = ninth.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#3-5k").val(ninth)
+                $("#1-5k").val(ninth)
             }
 
         }).disableSelection();
@@ -219,23 +219,22 @@
             connectWith: ".connectedSortable",
             receive: function( event, ui ) {
                 tenth.push(ui.item.context.id)
-                $("#1-3k").val(tenth)
+                $("#less_than_1k").val(tenth)
             },
             remove: function( event, ui ) {
                 tenth = tenth.filter(function(value, index, arr){ 
                     return value != ui.item.context.id;
                 });
-                $("#1-3k").val(tenth)
+                $("#less_than_1k").val(tenth)
             }
 
         }).disableSelection();
-
 
     });
 
     function submitAll() {
         var sum = first.length + second.length + third.length + fourth.length + fifth.length + sixth.length + seventh.length + eighth.length + ninth.length + tenth.length;
-        if(sum==13){
+        if(sum==15){
             return true;
         } else{
             //alert(first.length +"\ "+ second.length+"\ "+third.length+"\ "+fourth.length+"\ "+fifth.length+"\ "+sixth.length+"\ "+seventh.length+"\ "+eighth.length+"\ "+ninth.length+"\ "+tenth.length)
@@ -280,73 +279,75 @@
         <div>
             <div class="row">
                         <ul id="sortable1" class="connectedSortable">
-                        <li class="ui-state-default" id="us_president">US President</li>
-                        <li class="ui-state-default" id="orthodontist">Orthodontist</li>
-                        <li class="ui-state-default" id="us_vicepresident">US Vicepresident</li>
+                        <li class="ui-state-default" id="india_president">Indian President</li>
+                        <li class="ui-state-default" id="surgeon">Surgeon</li>
+                        <li class="ui-state-default" id="prime_minister">Prime Minister</li>
                         <li class="ui-state-default" id="dentist">Dentist</li>
                         <li class="ui-state-default" id="lawyer">Lawyer</li>
-                        <li class="ui-state-default" id="software_developer">Software Developer</li>
+                        <li class="ui-state-default" id="programmer">Programmer</li>
                         <li class="ui-state-default" id="makeup_artist">Makeup Artist</li>
-                        <li class="ui-state-default" id="highschool_teacher">High school teacher</li>
-                        <li class="ui-state-default" id="arts_design_media">Arts, Design, Entertainment, Sports, and Media Occupations</li>
-                        <li class="ui-state-default" id="firefighter">Firefighter</li>
-                        <li class="ui-state-default" id="legislator">Legislator</li>
-                        <li class="ui-state-default" id="hairdresser">Barber, hairdresser</li>
-                        <li class="ui-state-default" id="cashier">Cashier</li>
+                        <li class="ui-state-default" id="school_teacher">School Teacher</li>
+                        <li class="ui-state-default" id="arts_design_media">Arts, Design and Media Occupations</li>
+                        <li class="ui-state-default" id="emergency_services">Emergency Services</li>
+                        <li class="ui-state-default" id="barber">Barber</li>
+                        <li class="ui-state-default" id="minister">Institution (Health, Education, Finance etc.) Minister</li>
+                        <li class="ui-state-default" id="fastfood">Fastfood restaurant worker</li>
+                        <li class="ui-state-default" id="hairdresser">Cricket Player</li>
+                        <li class="ui-state-default" id="bus_driver">Bus Driver</li>
                         </ul>
 
                         <ul id="sortable2" class="connectedSortable">
-                        $35k+ 
+                        ₹10 lakh+ 
                         </ul>  
 
                         <ul id="sortable3" class="connectedSortable">
-                        $30-35k
+                        ₹6-10 lakh
                         </ul>
 
                         <ul id="sortable4" class="connectedSortable">
-                        $25-30k
+                        ₹3-6 lakh
                         </ul>
 
                         <ul id="sortable5" class="connectedSortable">
-                        $20-25k
+                        ₹1-3 lakh
                         </ul>
 
                         <ul id="sortable6" class="connectedSortable">
-                        $15-20k
+                        ₹80-100k
                         </ul>
 
                         <ul id="sortable7" class="connectedSortable">
-                        $10-15k
+                        ₹50-80k
                         </ul>
 
                         <ul id="sortable8" class="connectedSortable">
-                        $7.5-10k
+                        ₹20-50k
                         </ul>
 
                         <ul id="sortable9" class="connectedSortable">
-                        $5-7.5k
+                        ₹5-20k
                         </ul>
 
                         <ul id="sortable10" class="connectedSortable">
-                        $3-5k
+                        ₹1-5k
                         </ul>
 
                         <ul id="sortable11" class="connectedSortable">
-                        $1-3k
+                        less than ₹1k
                         </ul>
             </div>
             <form id="subForm" action="/activity9/{{ userID }}/" method="POST" onsubmit="return submitAll()">
                 <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
-                <input type="hidden" id="first" name="thirtyFiveThousand" value="">
-                <input type="hidden" id="30-35k" name="thirtyThousand" value="">
-                <input type="hidden" id="25-30k" name="twentyFiveThousand" value="">
-                <input type="hidden" id="20-25k" name="twentyThousand" value="">
-                <input type="hidden" id="15-20k" name="fifteenThousand" value="">
-                <input type="hidden" id="10-15k" name="tenThousand" value="">
-                <input type="hidden" id="7_5-10k" name="sevenThousandFiveHundred" value="">
-                <input type="hidden" id="5-7_5k" name="fiveThousand" value="">
-                <input type="hidden" id="3-5k" name="threeThousand" value="">
-                <input type="hidden" id="1-3k" name="oneThousand" value="">
+                <input type="hidden" id="more_than_1M" name="first" value="">
+                <input type="hidden" id="600k-1M" name="second" value="">
+                <input type="hidden" id="300-600k" name="third" value="">
+                <input type="hidden" id="100-300k" name="fourth" value="">
+                <input type="hidden" id="80-100k" name="fifth" value="">
+                <input type="hidden" id="50-80k" name="sixth" value="">
+                <input type="hidden" id="20-50k" name="seventh" value="">
+                <input type="hidden" id="5-20k" name="eighth" value="">
+                <input type="hidden" id="1-5k" name="ninth" value="">
+                <input type="hidden" id="less_than_1k" name="tenth" value="">
                 <input type="hidden" id="sec" name="sec" value="">
                 <input type="hidden" id="extra" name="extra" value="0">  
                 <input type="submit" class="btn btn-lg btn-secondary btn-block" id="submitButton" value="Submit" name="submitButton">
